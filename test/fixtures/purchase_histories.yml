@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shopping_list: one
+  purchased_on: 2025-06-19
+  total_price: 1
+
+two:
+  shopping_list: two
+  purchased_on: 2025-06-19
+  total_price: 1
