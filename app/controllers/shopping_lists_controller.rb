@@ -22,7 +22,7 @@ class ShoppingListsController < ApplicationController
   # POST /shopping_lists or /shopping_lists.json
   def create
     @shopping_list = ShoppingList.new(shopping_list_params)
-
+    
     respond_to do |format|
       if @shopping_list.save
         format.html { redirect_to @shopping_list, notice: "Shopping list was successfully created." }
