@@ -1,10 +1,21 @@
-<h1>Editing shopping list</h1>
+<h1>買い物リストを編集</h1>
 
-<%= render "form", shopping_list: @shopping_list %>
+<%= form_with(model: @shopping_list, local: true) do |form| %>
+  <div>
+    <%= form.label :name, "リスト名" %><br>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :budget, "予算（円）" %><br>
+    <%= form.number_field :budget %>
+  </div>
+  <div>
+    <%= form.label :shopped_on, "買い物日" %><br>
+    <%= form.date_field :shopped_on %>
+  </div>
+  <div>
+    <%= form.submit "更新" %>
+  </div>
+<% end %>
 
-<br>
-
-<div>
-  <%= link_to "Show this shopping list", @shopping_list %> |
-  <%= link_to "Back to shopping lists", shopping_lists_path %>
-</div>
+<%= link_to '詳細に戻る', shopping_list_path(@shopping_list) %> | <%= link_to '一覧に戻る', shopping_lists_path %>

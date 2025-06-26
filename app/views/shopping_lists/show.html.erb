@@ -1,14 +1,41 @@
-<p style="color: green"><%= notice %></p>
+<h1>買い物リスト詳細</h1>
 
-<div>
-  <%= link_to "Edit this shopping list", edit_shopping_list_path(@shopping_list) %> |
-  <%= link_to "Back to shopping lists", shopping_lists_path %>
-
-  <%= button_to "Destroy this shopping list", @shopping_list, method: :delete %>
-</div>
-
-<h1><%= @shopping_list.name %> の詳細</h1>
-<p>予算: <%= @shopping_list.budget %> 円</p>
+<p><strong>リスト名：</strong> <%= @shopping_list.name %></p>
+<p><strong>予算：</strong> <%= @shopping_list.budget %> 円</p>
 
 <%= link_to '編集', edit_shopping_list_path(@shopping_list) %> |
-<%= link_to '一覧に戻る', shopping_lists_path %><%= render @shopping_list %>
+<%= link_to '一覧に戻る', shopping_lists_path %>
+
+<%= button_to "この買い物リストを削除", @shopping_list, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+
+<hr>
+
+<h2>買い物アイテム一覧</h2>
+<% if @items.present? %>
+  <ul>
+    <% @items.each do |item| %>
+      <li><%= item.name %>（<%= item.quantity %>個）</li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>アイテムはまだ登録されていません。</p>
+<% end %>
+
+<h3>アイテムを追加</h3>
+<%= form_with(model: [@shopping_list, @item], local: true) do |form| %>
+  <div>
+    <%= form.label :name, "商品名" %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :quantity, "数量" %>
+    <%= form.number_field :quantity, value: 1 %>
+  </div>
+  <div>
+    <%= form.submit "追加" %>
+  </div>
+<% end %>
+
+<% if notice %>
+  <p style="color: green"><%= notice == 'Shopping list was successfully created.' ? 'リストが正常に作成されました。' : notice %></p>
+<% end %>

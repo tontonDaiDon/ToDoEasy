@@ -8,6 +8,9 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists/1 or /shopping_lists/1.json
   def show
+    @shopping_list = ShoppingList.find(params[:id])
+    @items = @shopping_list.items
+    @item = @shopping_list.items.build
   end
 
   # GET /shopping_lists/new
@@ -65,6 +68,6 @@ class ShoppingListsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shopping_list_params
-      params.require(:shopping_list).permit(:title, :budget, :shopped_on)
+      params.require(:shopping_list).permit(:name, :budget)
     end
 end
