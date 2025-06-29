@@ -1,0 +1,30 @@
+<h1>買い物リスト詳細</h1>
+
+<%= link_to '買い物前', before_shopping_shopping_list_path(@shopping_list) %> |
+<%= link_to '買い物中', during_shopping_shopping_list_path(@shopping_list) %> |
+<%= link_to '買い物後', after_shopping_shopping_list_path(@shopping_list) %>
+
+<h2>買い物アイテム一覧</h2>
+<%= form_with url: update_items_shopping_list_path(@shopping_list), method: :patch, local: true do %>
+  <table>
+    <tr>
+      <th>購入</th>
+      <th>商品名</th>
+      <th>数量</th>
+      <th>金額</th>
+    </tr>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= check_box_tag "items[#{item.id}][purchased]", "1", item.purchased %></td>
+        <td><%= item.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_field_tag "items[#{item.id}][price]", item.price, min: 0 %></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= submit_tag "更新" %>
+<% end %>
+
+<%# 合計金額の計算: 購入済みかつ金額が入力されているアイテムのみ %>
+<% total = @items.select { |item| item.purchased && item.price.present? }.sum { |item| item.price.to_i * (item.quantity || 1) } %>
+<p><strong>合計金額：</strong> <%= total %> 円</p> 

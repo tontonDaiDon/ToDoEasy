@@ -1,0 +1,15 @@
+<h1>買い物リスト詳細</h1>
+
+<%= link_to '買い物前', before_shopping_shopping_list_path(@shopping_list) %> |
+<%= link_to '買い物中', during_shopping_shopping_list_path(@shopping_list) %> |
+<%= link_to '買い物後', after_shopping_shopping_list_path(@shopping_list) %>
+
+<h2>買い物履歴</h2>
+<ul>
+  <% @items.select(&:purchased).each do |item| %>
+    <li><%= item.name %>（<%= item.quantity %>個 × <%= item.price %>円）</li>
+  <% end %>
+</ul>
+
+<% total = @items.select(&:purchased).sum { |item| (item.price || 0) * (item.quantity || 1) } %>
+<p><strong>合計金額：</strong> <%= total %> 円</p> 

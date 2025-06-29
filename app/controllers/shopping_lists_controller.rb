@@ -25,15 +25,10 @@ class ShoppingListsController < ApplicationController
   # POST /shopping_lists or /shopping_lists.json
   def create
     @shopping_list = ShoppingList.new(shopping_list_params)
-    
-    respond_to do |format|
-      if @shopping_list.save
-        format.html { redirect_to @shopping_list, notice: "Shopping list was successfully created." }
-        format.json { render :show, status: :created, location: @shopping_list }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @shopping_list.errors, status: :unprocessable_entity }
-      end
+    if @shopping_list.save
+      redirect_to shopping_lists_path, notice: 'リストが正常に作成されました。'
+    else
+      render :new
     end
   end
 
@@ -60,6 +55,23 @@ class ShoppingListsController < ApplicationController
     end
   end
 
+  def before_shopping
+    @shopping_list = ShoppingList.find(params[:id])
+    @items = @shopping_list.items
+    @item = @shopping_list.items.build
+  end
+
+  def during_shopping
+    @shopping_list = ShoppingList.find(params[:id])
+    @items = @shopping_list.items
+  end
+
+  def after_shopping
+    @shopping_list = ShoppingList.find(params[:id])
+    @items = @shopping_list.items
+    # 必要に応じて履歴や集計データも取得
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_shopping_list
@@ -70,4 +82,16 @@ class ShoppingListsController < ApplicationController
     def shopping_list_params
       params.require(:shopping_list).permit(:name, :budget)
     end
+end
+
+def update_items
+  @shopping_list = ShoppingList.find(params[:id])
+  params[:items]&.each do |id, item_params|
+    item = @shopping_list.items.find(id)
+    item.update(
+      purchased: item_params[:purchased] == "1",
+      price: item_params[:price].presence
+    )
+  end
+  redirect_to during_shopping_shopping_list_path(@shopping_list)
 end

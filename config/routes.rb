@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   resources :shopping_lists do
-    resources :items, only: [:create, :destroy]
+    member do
+      get :before_shopping   # 買い物前
+      get :during_shopping   # 買い物中
+      get :after_shopping    # 買い物後
+      patch :update_items    # 買い物中の一括更新
+    end
+    resources :items, only: [:create, :destroy, :edit, :update]
   end
+  resources :purchase_histories, only: [:index, :show]
 end
