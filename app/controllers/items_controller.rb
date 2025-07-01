@@ -32,6 +32,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def new
+    @shopping_list = ShoppingList.find(params[:shopping_list_id])
+    @item = @shopping_list.items.build
+  end
+
     
   private
     

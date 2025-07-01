@@ -21,20 +21,7 @@
   <% end %>
 </ul>
 
-<h3>アイテムを追加</h3>
-<%= form_with(model: [@shopping_list, @item], local: true) do |form| %>
-  <div style="margin-bottom: 8px;">
-    <%= form.label :name, "商品名" %>
-    <%= form.text_field :name, placeholder: "例：じゃがいも" %>
-  </div>
-  <div style="margin-bottom: 8px;">
-    <%= form.label :quantity, "数量" %>
-    <%= form.number_field :quantity, value: 1, min: 1 %>
-  </div>
-  <div>
-    <%= form.submit "追加" %>
-  </div>
-<% end %>
+<%= link_to 'アイテムを追加', new_shopping_list_item_path(@shopping_list) %>
 
 <% if @item && @item.errors.any? %>
   <div style="color: red;">

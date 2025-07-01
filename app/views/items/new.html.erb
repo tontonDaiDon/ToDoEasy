@@ -1,0 +1,15 @@
+<h2>アイテムを追加</h2>
+<%= form_with(model: [@shopping_list, @item], local: true) do |form| %>
+  <div>
+    <%= form.label :name, "商品名" %>
+    <%= form.text_field :name, placeholder: "例：じゃがいも" %>
+  </div>
+  <div>
+    <%= form.label :quantity, "数量" %>
+    <%= form.number_field :quantity, value: 1, min: 1 %>
+  </div>
+  <div>
+    <%= form.submit "追加" %>
+  </div>
+<% end %>
+<%= link_to '買い物前に戻る', before_shopping_shopping_list_path(@shopping_list) %>
