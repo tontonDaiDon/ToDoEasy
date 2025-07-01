@@ -34,14 +34,11 @@ class ShoppingListsController < ApplicationController
 
   # PATCH/PUT /shopping_lists/1 or /shopping_lists/1.json
   def update
-    respond_to do |format|
-      if @shopping_list.update(shopping_list_params)
-        format.html { redirect_to @shopping_list, notice: "Shopping list was successfully updated." }
-        format.json { render :show, status: :ok, location: @shopping_list }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @shopping_list.errors, status: :unprocessable_entity }
-      end
+    @shopping_list = ShoppingList.find(params[:id])
+    if @shopping_list.update(shopping_list_params)
+      redirect_to shopping_list_path(@shopping_list), notice: 'リストが正常に更新されました。'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -72,6 +69,29 @@ class ShoppingListsController < ApplicationController
     # 必要に応じて履歴や集計データも取得
   end
 
+  def update_items
+    @shopping_list = ShoppingList.find(params[:id])
+    params[:items]&.each do |id, item_params|
+      item = @shopping_list.items.find(id)
+      item.update(
+        purchased: item_params[:purchased] == "1",
+        price: item_params[:price].presence
+      )
+    end
+    redirect_to during_shopping_shopping_list_path(@shopping_list)
+  end
+
+  def discount_calc
+    @shopping_list = ShoppingList.find(params[:id])
+    @discount_result = nil
+
+    if params[:original_price].present? && params[:discount_rate].present?
+      original = params[:original_price].to_i
+      rate = params[:discount_rate].to_f
+      @discount_result = (original * (1 - rate / 100)).floor
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_shopping_list
@@ -82,16 +102,4 @@ class ShoppingListsController < ApplicationController
     def shopping_list_params
       params.require(:shopping_list).permit(:name, :budget)
     end
-end
-
-def update_items
-  @shopping_list = ShoppingList.find(params[:id])
-  params[:items]&.each do |id, item_params|
-    item = @shopping_list.items.find(id)
-    item.update(
-      purchased: item_params[:purchased] == "1",
-      price: item_params[:price].presence
-    )
-  end
-  redirect_to during_shopping_shopping_list_path(@shopping_list)
 end

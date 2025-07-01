@@ -1,0 +1,23 @@
+ja:
+  activerecord:
+    models:
+      item: アイテム
+      shopping_list: 買い物リスト
+    attributes:
+      item:
+        name: 商品名
+        quantity: 数量
+        price: 金額
+        purchased: 購入済み
+      shopping_list:
+        name: リスト名
+        budget: 予算
+  errors:
+    messages:
+      blank: "を入力してください"
+  helpers:
+    submit:
+      update: "更新"
+  notices:
+    shopping_list:
+      updated: "リストが正常に更新されました。"

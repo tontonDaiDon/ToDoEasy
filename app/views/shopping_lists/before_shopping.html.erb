@@ -14,7 +14,11 @@
 <h2>買い物アイテム一覧</h2>
 <ul>
   <% @items.each do |item| %>
-    <li><%= item.name %>（<%= item.quantity %>個）</li>
+    <% next if item.id.nil? %>
+    <li>
+      <%= item.name %>（<%= item.quantity %>個）
+      <%= link_to '編集', edit_shopping_list_item_path(@shopping_list, item) %>
+    </li>
   <% end %>
 </ul>
 
@@ -30,6 +34,16 @@
   </div>
   <div>
     <%= form.submit "追加" %>
+  </div>
+<% end %>
+
+<% if @item && @item.errors.any? %>
+  <div style="color: red;">
+    <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>
 
