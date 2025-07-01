@@ -12,4 +12,33 @@
 </ul>
 
 <% total = @items.select(&:purchased).sum { |item| (item.price || 0) * (item.quantity || 1) } %>
-<p><strong>合計金額：</strong> <%= total %> 円</p> 
+<p><strong>合計金額：</strong> <%= total %> 円</p>
+<p>
+  <strong>予算との差額：</strong>
+  <%= @budget_diff %> 円
+  <% if @budget_diff < 0 %>
+    <span style="color: red;">（オーバー！）</span>
+  <% elsif @budget_diff > 0 %>
+    <span style="color: green;">（あと<%= @budget_diff %>円使えます）</span>
+  <% else %>
+    <span style="color: blue;">（ぴったり！）</span>
+  <% end %>
+</p>
+
+<h3>買い物履歴を記録する</h3>
+<%= link_to '買い物履歴を記録する', new_shopping_list_purchase_history_path(@shopping_list) %>
+
+<% if @purchase_history %>
+  <p>購入日：<%= @purchase_history.purchased_on %></p>
+  <p>買った場所：<%= @purchase_history.place %></p>
+  <p>メモ：<%= @purchase_history.note %></p>
+  <%= link_to '履歴を編集', edit_shopping_list_purchase_history_path(@shopping_list, @purchase_history) %>
+  <% if @purchase_history.receipt_image.attached? %>
+    <p>レシート画像：</p>
+    <%= image_tag @purchase_history.receipt_image, style: "max-width: 300px;" %>
+  <% end %>
+<% end %>
+
+<div style="margin-top: 32px;">
+  <%= link_to '一覧に戻る', shopping_lists_path %>
+</div>

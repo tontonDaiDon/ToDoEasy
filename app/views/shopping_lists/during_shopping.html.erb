@@ -28,5 +28,20 @@
 <%# 合計金額の計算: 購入済みかつ金額が入力されているアイテムのみ %>
 <% total = @items.select { |item| item.purchased && item.price.present? }.sum { |item| item.price.to_i * (item.quantity || 1) } %>
 <p><strong>合計金額：</strong> <%= total %> 円</p>
+<p>
+  <strong>予算との差額：</strong>
+  <%= @budget_diff %> 円
+  <% if @budget_diff < 0 %>
+    <span style="color: red;">（オーバー！）</span>
+  <% elsif @budget_diff > 0 %>
+    <span style="color: green;">（あと<%= @budget_diff %>円使えます）</span>
+  <% else %>
+    <span style="color: blue;">（ぴったり！）</span>
+  <% end %>
+</p>
 
 <%= link_to '割引計算機を使う', discount_calc_shopping_list_path(@shopping_list) %> 
+
+<div style="margin-top: 32px;">
+  <%= link_to '一覧に戻る', shopping_lists_path %>
+</div>

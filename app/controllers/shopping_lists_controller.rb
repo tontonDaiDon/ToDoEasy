@@ -61,12 +61,19 @@ class ShoppingListsController < ApplicationController
   def during_shopping
     @shopping_list = ShoppingList.find(params[:id])
     @items = @shopping_list.items
+    @total = @items.select { |item| item.purchased && item.price.present? }
+                   .sum { |item| item.price.to_i * (item.quantity || 1) }
+    @budget_diff = @shopping_list.budget - @total
   end
 
   def after_shopping
     @shopping_list = ShoppingList.find(params[:id])
     @items = @shopping_list.items
-    # 必要に応じて履歴や集計データも取得
+    @total = @items.select { |item| item.purchased && item.price.present? }
+                   .sum { |item| item.price.to_i * (item.quantity || 1) }
+    @budget_diff = @shopping_list.budget - @total
+
+    @purchase_history = @shopping_list.purchase_histories.last
   end
 
   def update_items

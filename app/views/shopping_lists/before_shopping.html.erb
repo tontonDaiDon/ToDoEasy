@@ -7,8 +7,7 @@
 <p><strong>リスト名：</strong> <%= @shopping_list.name %></p>
 <p><strong>予算：</strong> <%= @shopping_list.budget %> 円</p>
 
-<%= link_to '編集', edit_shopping_list_path(@shopping_list) %> |
-<%= link_to '一覧に戻る', shopping_lists_path %>
+<%= link_to '編集', edit_shopping_list_path(@shopping_list) %> 
 <%= button_to 'この買い物リストを削除', @shopping_list, method: :delete, data: { confirm: '本当に削除しますか？' } %>
 
 <h2>買い物アイテム一覧</h2>
@@ -49,4 +48,8 @@
 
 <% if notice %>
   <p style="color: green"><%= notice %></p>
-<% end %> 
+<% end %>
+
+<div style="margin-top: 32px;">
+  <%= link_to '一覧に戻る', shopping_lists_path %>
+</div> 

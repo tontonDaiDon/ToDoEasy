@@ -1,0 +1,23 @@
+<h2>履歴を編集</h2>
+<%= form_with(model: [@shopping_list, @purchase_history], local: true, multipart: true) do |form| %>
+  <div>
+    <%= form.label :purchased_on, "購入日" %>
+    <%= form.date_field :purchased_on %>
+  </div>
+  <div>
+    <%= form.label :place, "買った場所" %>
+    <%= form.text_field :place %>
+  </div>
+  <div>
+    <%= form.label :note, "メモ" %>
+    <%= form.text_area :note %>
+  </div>
+  <div>
+    <%= form.label :receipt_image, "レシート画像" %>
+    <%= form.file_field :receipt_image %>
+  </div>
+  <div>
+    <%= form.submit "更新" %>
+  </div>
+<% end %>
+<%= link_to '買い物後に戻る', after_shopping_shopping_list_path(@shopping_list) %>
