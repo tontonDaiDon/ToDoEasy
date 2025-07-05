@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root "home#index"
+  get 'home/index'
   resources :shopping_lists do
     member do
       get :before_shopping   # 買い物前

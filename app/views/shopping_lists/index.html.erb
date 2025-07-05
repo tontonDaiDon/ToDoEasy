@@ -9,14 +9,16 @@
     <tr>
       <th>リスト名</th>
       <th>予算</th>
+      <th>買い物日</th>
       <th>操作</th>
     </tr>
   </thead>
   <tbody>
     <% @shopping_lists.each do |list| %>
       <tr>
-        <td><%= link_to list.name, shopping_list_path(list) %></td>
+        <td><%= link_to list.name, before_shopping_shopping_list_path(list) %></td>
         <td><%= list.budget %> 円</td>
+        <td><%= list.shopped_on %></td>
         <td>
           <%= link_to '編集', edit_shopping_list_path(list) %> |
           <%= link_to '削除', shopping_list_path(list), method: :delete, data: { confirm: '本当に削除しますか？' } %>

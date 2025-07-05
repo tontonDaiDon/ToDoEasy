@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h1 class="display-4 mb-4">ToDoEasyへようこそ！</h1>
+      <p class="lead mb-5">買い物リストアプリで効率的な買い物を始めましょう</p>
+      
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">買い物リスト一覧</h5>
+              <p class="card-text">作成済みの買い物リストを確認・管理できます</p>
+              <%= link_to "一覧を見る", shopping_lists_path, class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">新しいリスト作成</h5>
+              <p class="card-text">新しい買い物リストを作成します</p>
+              <%= link_to "作成する", new_shopping_list_path, class: "btn btn-success" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">買い物履歴</h5>
+              <p class="card-text">過去の買い物履歴を確認できます</p>
+              <%= link_to "履歴を見る", purchase_histories_path, class: "btn btn-info" %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 mb-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">アプリについて</h5>
+              <p class="card-text">ToDoEasyの使い方を確認できます</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

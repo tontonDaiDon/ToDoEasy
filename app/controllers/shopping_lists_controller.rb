@@ -64,6 +64,13 @@ class ShoppingListsController < ApplicationController
     @total = @items.select { |item| item.purchased && item.price.present? }
                    .sum { |item| item.price.to_i * (item.quantity || 1) }
     @budget_diff = @shopping_list.budget - @total
+
+    # 割引計算
+    if params[:original_price].present? && params[:discount_rate].present?
+      original = params[:original_price].to_i
+      rate = params[:discount_rate].to_f
+      @discount_result = (original * (1 - rate / 100)).floor
+    end
   end
 
   def after_shopping
@@ -88,17 +95,6 @@ class ShoppingListsController < ApplicationController
     redirect_to during_shopping_shopping_list_path(@shopping_list)
   end
 
-  def discount_calc
-    @shopping_list = ShoppingList.find(params[:id])
-    @discount_result = nil
-
-    if params[:original_price].present? && params[:discount_rate].present?
-      original = params[:original_price].to_i
-      rate = params[:discount_rate].to_f
-      @discount_result = (original * (1 - rate / 100)).floor
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_shopping_list
@@ -107,6 +103,6 @@ class ShoppingListsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def shopping_list_params
-      params.require(:shopping_list).permit(:name, :budget)
+      params.require(:shopping_list).permit(:name, :budget, :shopped_on)
     end
 end

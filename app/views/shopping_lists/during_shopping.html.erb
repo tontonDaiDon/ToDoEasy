@@ -40,7 +40,26 @@
   <% end %>
 </p>
 
-<%= link_to '割引計算機を使う', discount_calc_shopping_list_path(@shopping_list) %> 
+<h2>割引計算機</h2>
+<p>金額と割引率を入力して「計算」ボタンを押してください。</p>
+
+<%= form_with url: during_shopping_shopping_list_path(@shopping_list), method: :get, local: true do %>
+  <div>
+    <%= label_tag :original_price, "元の金額（円）" %>
+    <%= number_field_tag :original_price, params[:original_price], min: 0 %>
+  </div>
+  <div>
+    <%= label_tag :discount_rate, "割引率（%）" %>
+    <%= number_field_tag :discount_rate, params[:discount_rate], min: 0, max: 100, step: 0.1 %>
+  </div>
+  <div>
+    <%= submit_tag "計算" %>
+  </div>
+<% end %>
+
+<% if @discount_result %>
+  <p>割引後の金額：<strong><%= @discount_result %> 円</strong></p>
+<% end %>
 
 <div style="margin-top: 32px;">
   <%= link_to '一覧に戻る', shopping_lists_path %>

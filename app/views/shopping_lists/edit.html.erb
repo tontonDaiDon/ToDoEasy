@@ -10,6 +10,10 @@
     <%= form.number_field :budget %>
   </div>
   <div>
+    <%= form.label :shopped_on, "買い物日" %>
+    <%= form.date_field :shopped_on %>
+  </div>
+  <div>
     <%= form.submit "更新" %>
   </div>
 <% end %>

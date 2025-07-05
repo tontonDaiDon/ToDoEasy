@@ -5,7 +5,7 @@ class PurchaseHistoriesController < ApplicationController
     if @purchase_history.save
       redirect_to after_shopping_shopping_list_path(@shopping_list), notice: "履歴を保存しました"
     else
-      render :new, alert: "保存に失敗しました"
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,6 +27,10 @@ class PurchaseHistoriesController < ApplicationController
   def new
     @shopping_list = ShoppingList.find(params[:shopping_list_id])
     @purchase_history = @shopping_list.purchase_histories.build
+  end
+
+  def index
+    @purchase_histories = PurchaseHistory.all.order(purchased_on: :desc)
   end
 
   private

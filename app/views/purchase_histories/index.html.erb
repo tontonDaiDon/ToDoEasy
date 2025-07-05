@@ -1,0 +1,23 @@
+<h1>買い物履歴一覧</h1>
+<table>
+  <thead>
+    <tr>
+      <th>購入日</th>
+      <th>商品名</th>
+      <th>金額</th>
+      <th>買った場所</th>
+      <th>メモ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @purchase_histories.each do |history| %>
+      <tr>
+        <td><%= history.purchased_on %></td>
+        <td><%= history.shopping_list.try(:name) %></td>
+        <td><%= history.total_price %></td>
+        <td><%= history.place %></td>
+        <td><%= history.note %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
