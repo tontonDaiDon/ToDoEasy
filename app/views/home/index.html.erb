@@ -1,47 +1,71 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-8 text-center">
+    <div class="col-md-10 col-lg-8 text-center">
       <h1 class="display-4 mb-4">ToDoEasyへようこそ！</h1>
       <p class="lead mb-5">買い物リストアプリで効率的な買い物を始めましょう</p>
-      
+
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body text-left">
+          <h2 class="h4 mb-3 font-weight-bold">ToDoEasyの使い方</h2>
+          <ol class="mb-3 pl-3">
+            <li class="mb-2">
+              <b>新しいリストを作成</b><br>
+              「新しいリスト作成」から、買い物リストのタイトルや予算を入力してリストを作成します。<br>
+              <span class="text-muted small">例：タイトル「週末の買い出し」、予算「5,000円」</span>
+            </li>
+            <li class="mb-2">
+              <b>アイテムを追加</b><br>
+              作成したリストに、購入予定の商品や数量、メモなどを追加します。<br>
+              <span class="text-muted small">例：商品名「牛乳」、数量「2本」、メモ「特売品を優先」</span>
+            </li>
+            <li class="mb-2">
+              <b>買い物前・買い物中・買い物後の管理</b><br>
+              買い物前はリストの確認・編集、買い物中は購入チェックや合計金額の確認、買い物後は履歴として保存できます。<br>
+              <span class="text-muted small">例：買い物中に「購入済み」にチェック、合計金額が自動計算されます</span>
+            </li>
+            <li class="mb-2">
+              <b>履歴の確認</b><br>
+              過去の買い物履歴や合計金額、買った場所、メモなどを一覧で確認できます。<br>
+              <span class="text-muted small">例：「2025-07-08 スーパー 4,800円」などの履歴が残ります</span>
+            </li>
+            <li class="mb-2">
+              <b>家計管理にも活用</b><br>
+              買い物履歴を活用して、月ごとの支出やお得情報を振り返ることができます。<br>
+              <span class="text-muted small">例：月ごとの合計金額を確認して節約に役立てましょう</span>
+            </li>
+          </ol>
+          <p class="mb-0 text-muted">使い方に迷ったら、いつでも「トップへ戻る」ボタンからこのページに戻って確認できます。</p>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-md-6 mb-3">
-          <div class="card h-100">
+          <div class="card h-100 shadow-sm">
             <div class="card-body">
-              <h5 class="card-title">買い物リスト一覧</h5>
-              <p class="card-text">作成済みの買い物リストを確認・管理できます</p>
-              <%= link_to "一覧を見る", shopping_lists_path, class: "btn btn-primary" %>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-md-6 mb-3">
-          <div class="card h-100">
-            <div class="card-body">
-              <h5 class="card-title">新しいリスト作成</h5>
+              <h3 class="h5 card-title">新しいリスト作成</h3>
               <p class="card-text">新しい買い物リストを作成します</p>
               <%= link_to "作成する", new_shopping_list_path, class: "btn btn-success" %>
             </div>
           </div>
         </div>
-      </div>
-      
-      <div class="row mt-4">
         <div class="col-md-6 mb-3">
-          <div class="card h-100">
+          <div class="card h-100 shadow-sm">
             <div class="card-body">
-              <h5 class="card-title">買い物履歴</h5>
-              <p class="card-text">過去の買い物履歴を確認できます</p>
-              <%= link_to "履歴を見る", purchase_histories_path, class: "btn btn-info" %>
+              <h3 class="h5 card-title">買い物リスト一覧</h3>
+              <p class="card-text">作成済みの買い物リストを確認・管理できます</p>
+              <%= link_to "一覧を見る", shopping_lists_path, class: "btn btn-primary" %>
             </div>
           </div>
         </div>
-        
+      </div>
+
+      <div class="row mt-4">
         <div class="col-md-6 mb-3">
-          <div class="card h-100">
+          <div class="card h-100 shadow-sm">
             <div class="card-body">
-              <h5 class="card-title">アプリについて</h5>
-              <p class="card-text">ToDoEasyの使い方を確認できます</p>
+              <h3 class="h5 card-title">買い物履歴</h3>
+              <p class="card-text">過去の買い物履歴を確認できます</p>
+              <%= link_to "履歴を見る", purchase_histories_path, class: "btn btn-info" %>
             </div>
           </div>
         </div>
