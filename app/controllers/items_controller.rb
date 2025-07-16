@@ -7,15 +7,15 @@ class ItemsController < ApplicationController
     else
       @items = @shopping_list.items
       render 'shopping_lists/before_shopping', status: :unprocessable_entity
+      end
     end
-  end
     
-  def destroy
-    @item = Item.find(params[:id])
-    @shopping_list = @item.shopping_list
-    @item.destroy
-    redirect_to shopping_list_path(@shopping_list), notice: 'アイテムを削除しました'
-  end
+    def destroy
+      @item = Item.find(params[:id])
+      @shopping_list = @item.shopping_list
+      @item.destroy
+      redirect_to shopping_list_path(@shopping_list), notice: 'アイテムを削除しました'
+    end
 
   def edit
     @shopping_list = ShoppingList.find(params[:shopping_list_id])

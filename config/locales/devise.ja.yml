@@ -1,3 +1,5 @@
+# Additional translations at https://github.com/heartcombo/devise/wiki/I18n
+
 ja:
   devise:
     confirmations:
@@ -21,6 +23,10 @@ ja:
         subject: "パスワード再設定について"
       unlock_instructions:
         subject: "アカウントのロック解除について"
+      email_changed:
+        subject: "メールアドレスの変更について"
+      password_change:
+        subject: "パスワードの変更について"
     omniauth_callbacks:
       failure: "%{kind} アカウントによる認証に失敗しました。理由：（%{reason}）"
       success: "%{kind} アカウントによる認証に成功しました。"
@@ -57,39 +63,4 @@ ja:
         not_saved:
           one: "エラーが発生したため %{resource} は保存されませんでした："
           other: "エラーが発生したため %{resource} は保存されませんでした："
-  activerecord:
-    models:
-      user: ユーザー
-      item: アイテム
-      shopping_list: 買い物リスト
-      purchase_history: 買い物履歴
-    attributes:
-      user:
-        email: メールアドレス
-        password: パスワード
-        password_confirmation: パスワード（確認用）
-        nickname: ユーザー名
-      item:
-        name: 商品名
-        quantity: 数量
-        price: 金額
-        purchased: 購入済み
-      shopping_list:
-        name: リスト名
-        budget: 予算
-      purchase_history:
-        purchased_on: 購入日
-        total_price: 合計金額
-        place: 買った場所
-        note: メモ
-  errors:
-    messages:
-      blank: "を入力してください"
-      not_a_number: "は数値で入力してください"
-      greater_than: "%{count}より大きい値にしてください"
-  helpers:
-    submit:
-      update: "更新"
-  notices:
-    shopping_list:
-      updated: "リストが正常に更新されました。"
+        taken: "はすでに使用されています"

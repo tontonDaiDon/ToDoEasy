@@ -25,9 +25,9 @@ class ShoppingListsController < ApplicationController
   # POST /shopping_lists or /shopping_lists.json
   def create
     @shopping_list = ShoppingList.new(shopping_list_params)
-    if @shopping_list.save
+      if @shopping_list.save
       redirect_to shopping_lists_path, notice: 'リストが正常に作成されました。'
-    else
+      else
       render :new
     end
   end
@@ -35,9 +35,9 @@ class ShoppingListsController < ApplicationController
   # PATCH/PUT /shopping_lists/1 or /shopping_lists/1.json
   def update
     @shopping_list = ShoppingList.find(params[:id])
-    if @shopping_list.update(shopping_list_params)
+      if @shopping_list.update(shopping_list_params)
       redirect_to shopping_list_path(@shopping_list), notice: 'リストが正常に更新されました。'
-    else
+      else
       render :edit, status: :unprocessable_entity
     end
   end

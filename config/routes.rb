@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  get '/logout', to: 'sessions#destroy', as: :logout
   root "home#index"
   get 'home/index'
   resources :shopping_lists do
