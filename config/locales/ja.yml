@@ -84,9 +84,12 @@ ja:
         note: メモ
   errors:
     messages:
+      not_saved: "エラーが発生したため%{resource}は保存されませんでした："
+      taken: "はすでに使用されています"
       blank: "を入力してください"
       not_a_number: "は数値で入力してください"
       greater_than: "%{count}より大きい値にしてください"
+      confirmation: "と一致しません"
   helpers:
     submit:
       update: "更新"

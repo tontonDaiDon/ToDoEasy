@@ -1,13 +1,13 @@
 <h2>ログイン</h2>
 
-<p>メールアドレスとパスワードを入力してください。</p>
+<p>メールアドレスまたはユーザー名とパスワードを入力してください。</p>
 
 <%= render "devise/shared/error_messages", resource: resource %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :login, "ユーザー名またはメールアドレス" %><br />
+    <%= f.text_field :login, autofocus: true, autocomplete: "username" %>
   </div>
 
   <div class="field">
