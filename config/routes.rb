@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get '/logout', to: 'sessions#destroy', as: :logout
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   root "home#index"
   get 'home/index'
   resources :shopping_lists do
@@ -16,4 +15,5 @@ Rails.application.routes.draw do
     resources :purchase_histories, only: [:new, :create, :edit, :update]
   end
   resources :purchase_histories, only: [:index, :show]
+  get '/logout', to: 'sessions#destroy', as: :simple_logout
 end
