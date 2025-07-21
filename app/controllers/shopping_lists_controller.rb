@@ -6,13 +6,6 @@ class ShoppingListsController < ApplicationController
     @shopping_lists = ShoppingList.all
   end
 
-  # GET /shopping_lists/1 or /shopping_lists/1.json
-  def show
-    @shopping_list = ShoppingList.find(params[:id])
-    @items = @shopping_list.items
-    @item = @shopping_list.items.build
-  end
-
   # GET /shopping_lists/new
   def new
     @shopping_list = ShoppingList.new
@@ -36,20 +29,17 @@ class ShoppingListsController < ApplicationController
   def update
     @shopping_list = ShoppingList.find(params[:id])
       if @shopping_list.update(shopping_list_params)
-      redirect_to shopping_list_path(@shopping_list), notice: 'リストが正常に更新されました。'
+      redirect_to before_shopping_shopping_list_path(@shopping_list), notice: 'リストを更新しました'
       else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
   # DELETE /shopping_lists/1 or /shopping_lists/1.json
   def destroy
-    @shopping_list.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to shopping_lists_path, status: :see_other, notice: "Shopping list was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @shopping_list = ShoppingList.find(params[:id])
+    @shopping_list.destroy
+    redirect_to shopping_lists_path, notice: 'リストを削除しました'
   end
 
   def before_shopping
@@ -93,6 +83,10 @@ class ShoppingListsController < ApplicationController
       )
     end
     redirect_to during_shopping_shopping_list_path(@shopping_list)
+  end
+
+  def show
+    redirect_to shopping_lists_path
   end
 
   private

@@ -3,7 +3,7 @@
   <thead>
     <tr>
       <th>購入日</th>
-      <th>商品名</th>
+      <th>リスト名</th>
       <th>金額</th>
       <th>買った場所</th>
       <th>メモ</th>
@@ -14,7 +14,7 @@
       <tr>
         <td><%= history.purchased_on %></td>
         <td><%= history.shopping_list.try(:name) %></td>
-        <td><%= history.total_price %></td>
+        <td><%= history.shopping_list.purchased_total_price %> 円</td>
         <td><%= history.place %></td>
         <td><%= history.note %></td>
       </tr>

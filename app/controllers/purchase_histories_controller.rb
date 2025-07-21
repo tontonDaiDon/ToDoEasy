@@ -1,11 +1,14 @@
 class PurchaseHistoriesController < ApplicationController
   def create
     @shopping_list = ShoppingList.find(params[:shopping_list_id])
+    # 既存の履歴を削除
+    @shopping_list.purchase_histories.destroy_all
+
     @purchase_history = @shopping_list.purchase_histories.build(purchase_history_params)
     if @purchase_history.save
-      redirect_to after_shopping_shopping_list_path(@shopping_list), notice: "履歴を保存しました"
+      redirect_to purchase_histories_path, notice: '履歴を記録しました'
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 

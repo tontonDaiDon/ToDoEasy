@@ -10,7 +10,7 @@
     <%= form.number_field :budget %>
   </div>
   <div>
-    <%= form.label :shopped_on, "買い物日" %>
+    <%= form.label :shopped_on, "リスト作成日" %>
     <%= form.date_field :shopped_on %>
   </div>
   <div>
@@ -18,4 +18,6 @@
   </div>
 <% end %>
 
-<%= link_to '詳細に戻る', shopping_list_path(@shopping_list) %> | <%= link_to '一覧に戻る', shopping_lists_path %>
+<%= link_to '一覧に戻る', shopping_lists_path %>
+<br>
+<%= button_to 'このリストを削除', shopping_list_path(@shopping_list), method: :delete, data: { confirm: '本当に削除しますか？' }, form: { data: { turbo: false } }, style: "color: red;" %>
