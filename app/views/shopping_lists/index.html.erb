@@ -4,6 +4,15 @@
 
 <%= link_to '新しいリストを作成', new_shopping_list_path %>
 
+<%= form_with url: shopping_lists_path, method: :get, local: true do %>
+  <%= month_field_tag :year_month, params[:year_month] %>
+  <%= submit_tag "検索" %>
+<% end %>
+
+<% if params[:year_month].present? %>
+  <h3><%= params[:year_month] %>の予算合計：<%= @monthly_budget_total %>円</h3>
+<% end %>
+
 <table>
   <thead>
     <tr>

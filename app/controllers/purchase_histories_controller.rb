@@ -33,7 +33,16 @@ class PurchaseHistoriesController < ApplicationController
   end
 
   def index
-    @purchase_histories = PurchaseHistory.all.order(purchased_on: :desc)
+    @purchase_histories = PurchaseHistory.order(purchased_on: :asc)
+    if params[:year_month].present?
+      year, month = params[:year_month].split('-')
+      start_date = Date.new(year.to_i, month.to_i, 1)
+      end_date = start_date.end_of_month
+      @purchase_histories = @purchase_histories.where(purchased_on: start_date..end_date)
+    end
+
+    # 月の合計金額を計算
+    @monthly_total_price = @purchase_histories.joins(:shopping_list).sum('shopping_lists.budget')
   end
 
   private

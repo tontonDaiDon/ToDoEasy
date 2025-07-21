@@ -3,7 +3,16 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists or /shopping_lists.json
   def index
-    @shopping_lists = ShoppingList.all
+    @shopping_lists = ShoppingList.order(shopped_on: :asc)
+    if params[:year_month].present?
+      year, month = params[:year_month].split('-')
+      start_date = Date.new(year.to_i, month.to_i, 1)
+      end_date = start_date.end_of_month
+      @shopping_lists = @shopping_lists.where(shopped_on: start_date..end_date)
+    end
+
+    # 月の予算合計を計算
+    @monthly_budget_total = @shopping_lists.sum(:budget)
   end
 
   # GET /shopping_lists/new

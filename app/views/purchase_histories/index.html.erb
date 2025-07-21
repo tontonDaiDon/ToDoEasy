@@ -1,4 +1,8 @@
 <h1>買い物履歴一覧</h1>
+<%= form_with url: purchase_histories_path, method: :get, local: true do %>
+  <%= month_field_tag :year_month, params[:year_month] %>
+  <%= submit_tag "検索" %>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -21,3 +25,6 @@
     <% end %>
   </tbody>
 </table>
+<% if params[:year_month].present? %>
+  <h3><%= params[:year_month] %>の買い物合計：<%= @monthly_total_price %>円</h3>
+<% end %>
