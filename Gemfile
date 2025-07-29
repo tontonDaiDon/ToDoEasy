@@ -69,3 +69,7 @@ group :test do
 end
 
 gem 'devise'
+
+# Gemfile
+
+gem 'sassc-rails'

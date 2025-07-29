@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>ToDoEasy2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,18 +10,47 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <nav style="margin-bottom: 20px;">
-      <%= link_to "トップへ戻る", root_path, class: "btn btn-outline-primary" %>
+  <body class="bg-light text-dark">
+    <% if user_signed_in? %>
+      <!-- ナビゲーション（ログイン時のみ） -->
+      <header class="app-header bg-white border-bottom shadow-sm py-3 mb-4">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+          <div>
+            <%= link_to "ToDoEasy", root_path, class: "btn btn-outline-primary me-2" %>
+          </div>
+          <div class="d-flex align-items-center ms-auto">
+            <span class="me-3">
+              こんにちは、<%= (current_user&.nickname.presence || current_user&.email) %> さん
+            </span>
+            <%= link_to "ログアウト", simple_logout_path, class: "btn btn-outline-danger" %>
+          </div>
+        </div>
+      </header>
+    <% end %>
 
-      <% if user_signed_in? %>
-        <span style="margin: 0 10px;">こんにちは、<%= current_user.nickname.presence || current_user.email %> さん</span>
-        <%= link_to "ログアウト", simple_logout_path, class: "btn btn-outline-danger" %>
-      <% else %>
-        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-success" %>
-        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-info" %>
+    <!-- フラッシュメッセージ -->
+    <div class="container">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= notice %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <% end %>
-    </nav>
-    <%= yield %>
+      <% if alert %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= alert %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+    </div>
+
+    <main class="container mb-5">
+      <%= yield %>
+    </main>
+
+    <!-- フッター -->
+    <footer class="app-footer bg-white border-top text-center text-muted py-3">
+      <small>&copy; 2025 ToDoEasy. All rights reserved.</small>
+    </footer>
   </body>
 </html>

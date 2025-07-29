@@ -1,89 +1,88 @@
-<div class="container mt-5">
+<div class="container mt-5 home-hero">
   <div class="row justify-content-center">
     <div class="col-md-10 col-lg-8 text-center">
+
       <h1 class="display-4 mb-4">ToDoEasyへようこそ！</h1>
       <p class="lead mb-5">買い物リストアプリで効率的な買い物を始めましょう</p>
 
       <% if user_signed_in? %>
-        <div class="card mb-4 shadow-sm">
-          <div class="card-body text-left">
+        <!-- ✅ ログイン済みユーザー向け：使い方説明 -->
+        <div class="card mb-4 shadow-sm text-left">
+          <div class="card-body">
             <h2 class="h4 mb-3 font-weight-bold">ToDoEasyの使い方</h2>
-            <ol class="mb-3 pl-3">
-              <li class="mb-2">
-                <b>新しいリストを作成</b><br>
-                「新しいリスト作成」から、買い物リストのタイトルや予算を入力してリストを作成します。<br>
-                <span class="text-muted small">例：タイトル「週末の買い出し」、予算「5,000円」</span>
+            <ol class="howto-list">
+              <li class="mb-2"><b>新しいリストを作成</b><br>
+                「新しいリスト作成」からタイトルや予算を入力して開始します。<br>
+                <span class="text-muted small">例：「週末の買い出し」、予算「5,000円」</span>
               </li>
-              <li class="mb-2">
-                <b>アイテムを追加</b><br>
-                作成したリストに、購入予定の商品や数量、メモなどを追加します。<br>
-                <span class="text-muted small">例：商品名「牛乳」、数量「2本」、メモ「特売品を優先」</span>
+              <li class="mb-2"><b>アイテムを追加</b><br>
+                商品名や数量、メモなどをリストに追加します。<br>
+                <span class="text-muted small">例：「牛乳」、数量「2本」</span>
               </li>
-              <li class="mb-2">
-                <b>買い物前・買い物中・買い物後の管理</b><br>
-                買い物前はリストの確認・編集、買い物中は購入チェックや合計金額の確認、買い物後は履歴として保存できます。<br>
-                <span class="text-muted small">例：買い物中に「購入済み」にチェック、合計金額が自動計算されます</span>
+              <li class="mb-2"><b>買い物中にチェック</b><br>
+                「購入済み」にチェックして合計金額を確認できます。
               </li>
-              <li class="mb-2">
-                <b>履歴の確認</b><br>
-                過去の買い物履歴や合計金額、買った場所、メモなどを一覧で確認できます。<br>
-                <span class="text-muted small">例：「2025-07-08 スーパー 4,800円」などの履歴が残ります</span>
+              <li class="mb-2"><b>履歴を確認</b><br>
+                過去の買い物履歴・合計金額などを一覧で確認可能。
               </li>
-              <li class="mb-2">
-                <b>家計管理にも活用</b><br>
-                買い物履歴を活用して、月ごとの支出やお得情報を振り返ることができます。<br>
-                <span class="text-muted small">例：月ごとの合計金額を確認して節約に役立てましょう</span>
+              <li class="mb-2"><b>家計管理に活用</b><br>
+                月ごとの支出を確認して節約にも役立ちます。
               </li>
             </ol>
-            <p class="mb-0 text-muted">使い方に迷ったら、いつでも「トップへ戻る」ボタンからこのページに戻って確認できます。</p>
+            <p class="mb-0 text-muted">使い方に迷ったら、いつでもこのページに戻って確認できます。</p>
           </div>
         </div>
-      <% end %>  
 
-      <div class="row">
-      <% if user_signed_in? %>
-        <!-- ログイン済みユーザー向け表示 -->
-        <div class="col-md-6 mb-3">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h3 class="h5 card-title">新しいリスト作成</h3>
-              <p class="card-text">新しい買い物リストを作成します</p>
-              <%= link_to "作成する", new_shopping_list_path, class: "btn btn-success" %>
+        <!-- ✅ ログイン済みユーザー向け：機能カード -->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="h5 card-title">新しいリスト作成</h3>
+                <p class="card-text">新しい買い物リストを作成します</p>
+                <%= link_to "作成する", new_shopping_list_path, class: "btn btn-success" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="h5 card-title">買い物リスト一覧</h3>
+                <p class="card-text">作成済みの買い物リストを確認・管理できます</p>
+                <%= link_to "一覧を見る", shopping_lists_path, class: "btn btn-primary" %>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6 mb-3">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h3 class="h5 card-title">買い物リスト一覧</h3>
-              <p class="card-text">作成済みの買い物リストを確認・管理できます</p>
-              <%= link_to "一覧を見る", shopping_lists_path, class: "btn btn-primary" %>
+
+        <!-- ✅ ログイン済み：履歴カード -->
+        <div class="row mt-3">
+          <div class="col-md-6 mb-3">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="h5 card-title">買い物履歴</h3>
+                <p class="card-text">過去の買い物履歴を確認できます</p>
+                <%= link_to "履歴を見る", purchase_histories_path, class: "btn btn-info" %>
+              </div>
             </div>
           </div>
         </div>
+
       <% else %>
-        <!-- 未ログインユーザー向け表示 -->
-        <div class="col-12">
-          <div class="card shadow-sm">
-            <div class="card-body text-center">
-              <h3 class="h5 card-title">ToDoEasyを始めましょう</h3>
-              <p class="card-text">ご利用にはログインまたは新規登録が必要です。</p>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    
-    <div class="row mt-4">
-      <% if user_signed_in? %>
-        <!-- 買い物履歴（ログインユーザーのみ） -->
-        <div class="col-md-6 mb-3">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h3 class="h5 card-title">買い物履歴</h3>
-              <p class="card-text">過去の買い物履歴を確認できます</p>
-              <%= link_to "履歴を見る", purchase_histories_path, class: "btn btn-info" %>
+        <!-- ✅ 未ログインユーザー向け表示：B案（シンプル導線のみ） -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-body text-center">
+            <h2 class="h4 mb-3">まずは始めてみましょう</h2>
+            <p class="mb-4">ご利用にはログインまたは新規登録が必要です。</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success px-4 mb-2" %>
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-info px-4 mb-2" %>
             </div>
           </div>
         </div>
+        <p class="text-muted small">登録・ログイン後にリスト作成や履歴の確認ができます。</p>
       <% end %>
+
     </div>
+  </div>
+</div>
