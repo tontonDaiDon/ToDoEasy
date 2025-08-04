@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
@@ -14,31 +13,33 @@
     <% if user_signed_in? %>
       <!-- ナビゲーション（ログイン時のみ） -->
       <header class="app-header bg-white border-bottom shadow-sm py-3 mb-4">
-        <div class="container d-flex flex-wrap justify-content-between align-items-center">
-          <div>
+        <div class="container d-flex align-items-center justify-content-between">
+          <div class="left">
             <%= link_to "ToDoEasy", root_path, class: "btn btn-outline-primary me-2" %>
           </div>
-          <div class="d-flex align-items-center ms-auto">
+          <div class="center mx-auto text-center">
             <span class="me-3">
               こんにちは、<%= (current_user&.nickname.presence || current_user&.email) %> さん
             </span>
-            <%= link_to "ログアウト", simple_logout_path, class: "btn btn-outline-danger" %>
+          </div>
+          <div class="right ms-auto">
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
           </div>
         </div>
       </header>
     <% end %>
 
-    <!-- フラッシュメッセージ -->
+    <!-- フラッシュメッセージ（ログイン状態問わず表示） -->
     <div class="container">
-      <% if notice %>
+      <% if flash[:notice] %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%= notice %>
+          <%= flash[:notice] %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
-      <% if alert %>
+      <% if flash[:alert] %>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <%= alert %>
+          <%= flash[:alert] %>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       <% end %>
@@ -48,7 +49,6 @@
       <%= yield %>
     </main>
 
-    <!-- フッター -->
     <footer class="app-footer bg-white border-top text-center text-muted py-3">
       <small>&copy; 2025 ToDoEasy. All rights reserved.</small>
     </footer>

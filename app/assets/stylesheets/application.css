@@ -1,107 +1,126 @@
-/* app/assets/stylesheets/application.css */
 body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background-color: #f8f9fa;
-  }
-  
-  h1, h2, h3 {
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .card {
-    border-radius: 12px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-  }
-  
-  .btn {
-    border-radius: 8px;
-  }
-  
- /* ================================
-   0) Bootstrap（導入済みなら有効化）
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #f8f9fa;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  color: #333;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn {
+  border-radius: 8px;
+}
+
+/* ================================
+ 0) Bootstrap（導入済みなら有効化）
 =================================== */
 /* @import "bootstrap"; */
 
 /* ================================
-   1) デザイントークン（色・影・角丸・余白）
-   - ここを書き換えるだけで全体の雰囲気を変更できます
+ 1) デザイントークン（色・影・角丸・余白）
+ - ここを書き換えるだけで全体の雰囲気を変更できます
 =================================== */
 :root {
-  /* colors */
-  --bg:            #f8f9fa;
-  --surface:       #ffffff;
-  --text:          #333333;
-  --muted:         #6c757d;
-  --border:        #e9ecef;
+/* colors */
+--bg:            #f8f9fa;
+--surface:       #ffffff;
+--text:          #333333;
+--muted:         #6c757d;
+--border:        #e9ecef;
 
-  --primary:       #4caf50;
-  --primary-600:   #43a047;
-  --success:       #2e7d32;
-  --info:          #0d6efd;
-  --danger:        #dc3545;
+--primary:       #4caf50;
+--primary-600:   #43a047;
+--success:       #2e7d32;
+--info:          #0d6efd;
+--danger:        #dc3545;
 
-  /* radii */
-  --radius-sm:     8px;
-  --radius-md:     12px;
-  --radius-lg:     16px;
+/* radii */
+--radius-sm:     8px;
+--radius-md:     12px;
+--radius-lg:     16px;
 
-  /* shadows */
-  --shadow-sm:     0 2px 6px rgba(0,0,0,0.06);
-  --shadow-md:     0 6px 16px rgba(0,0,0,0.08);
+/* shadows */
+--shadow-sm:     0 2px 6px rgba(0,0,0,0.06);
+--shadow-md:     0 6px 16px rgba(0,0,0,0.08);
 
-  /* spacing scale */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
+/* spacing scale */
+--space-1: 0.25rem;
+--space-2: 0.5rem;
+--space-3: 0.75rem;
+--space-4: 1rem;
+--space-5: 1.5rem;
+--space-6: 2rem;
 }
 
 /* ================================
-   2) ベース（リセットに近い軽調整・タイポ）
+ 2) ベース（リセットに近い軽調整・タイポ）
 =================================== */
 html, body {
-  height: 100%;
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+height: 100%;
+background: var(--bg);
+color: var(--text);
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: "Noto Sans JP", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  line-height: 1.6;
+font-family: "Noto Sans JP", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+line-height: 1.6;
 }
 
 a {
-  color: var(--info);
-  text-decoration: none;
+color: var(--info);
+text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
+text-decoration: underline;
 }
 
 h1, h2, h3, h4 {
-  color: var(--text);
-  font-weight: 600;
+color: var(--text);
+font-weight: 600;
 }
 
 /* フォーカスの視認性（アクセシビリティ） */
 :focus-visible {
-  outline: 3px solid rgba(13,110,253,.35);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
+outline: 3px solid rgba(13,110,253,.35);
+outline-offset: 2px;
+border-radius: var(--radius-sm);
 }
 
 /* ================================
-   3) レイアウト（ヘッダー/フッター/コンテナ）
+ 3) レイアウト（ヘッダー/フッター/コンテナ）
 =================================== */
 .app-header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
+}
+
+/* ヘッダー内部のレイアウト */
+.header {
+  display: flex;
+  justify-content: space-between; /* 左右に分ける */
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.header .left {
+  display: flex;
+  gap: 1rem; /* ボタンとテキストに余白 */
+  align-items: center;
+}
+
+.header .right {
+  /* justify-content: space-between の効果で右寄せ */
 }
 
 .app-header .btn {
@@ -120,391 +139,208 @@ main.container {
 }
 
 /* ================================
-   4) カード・パネル
+ 4) カード・パネル
 =================================== */
 .card {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-sm);
 }
 
 .card .card-body {
-  padding: var(--space-5);
+padding: var(--space-5);
 }
 
 .card-title {
-  font-weight: 600;
+font-weight: 600;
 }
 
 /* ================================
-   5) ボタン（色味を少し落ち着かせる）
+ 5) ボタン（色味を少し落ち着かせる）
 =================================== */
+/* 共通ボタンスタイル */
+/* 汎用ボタン */
 .btn {
-  border-radius: var(--radius-sm);
+  display: inline-block;
   padding: 0.5rem 1rem;
+  font-size: 1rem;
   font-weight: 600;
+  border-radius: var(--radius-sm, 8px); /* Fallback: 8px */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+  text-decoration: none;
 }
 
+/* ----------------------------------------
+   ボタンのバリエーション
+---------------------------------------- */
+
+/* プライマリ（ブルー） */
 .btn-primary {
-  background-color: var(--info);
-  border-color: var(--info);
+  background-color: var(--info, #007bff);
+  color: #fff;
 }
 .btn-primary:hover {
-  background-color: darken(var(--info), 6%);
-  border-color: darken(var(--info), 6%);
+  background-color: #0069d9;
 }
 
+/* サクセス（グリーン） */
 .btn-success {
-  background-color: var(--primary);
-  border-color: var(--primary);
+  background-color: var(--primary, #28a745);
+  color: #fff;
 }
 .btn-success:hover {
-  background-color: var(--primary-600);
-  border-color: var(--primary-600);
+  background-color: #218838;
 }
 
+/* アウトライン（青） */
 .btn-outline-primary {
-  color: var(--info);
-  border-color: var(--info);
+  background-color: transparent;
+  color: var(--info, #007bff);
+  border: 2px solid var(--info, #007bff);
 }
 .btn-outline-primary:hover {
+  background-color: var(--info, #007bff);
   color: #fff;
-  background-color: var(--info);
-  border-color: var(--info);
 }
 
+/* アウトライン（赤） */
 .btn-outline-danger {
-  color: var(--danger);
-  border-color: var(--danger);
+  background-color: transparent;
+  color: var(--danger, #dc3545);
+  border: 2px solid var(--danger, #dc3545);
 }
 .btn-outline-danger:hover {
+  background-color: var(--danger, #dc3545);
   color: #fff;
-  background-color: var(--danger);
-  border-color: var(--danger);
 }
 
+/* アウトライン（グリーン） */
 .btn-outline-success {
-  color: var(--primary);
-  border-color: var(--primary);
+  background-color: transparent;
+  color: var(--primary, #28a745);
+  border: 2px solid var(--primary, #28a745);
 }
 .btn-outline-success:hover {
+  background-color: var(--primary, #28a745);
   color: #fff;
-  background-color: var(--primary);
-  border-color: var(--primary);
 }
 
+/* アウトライン（水色） */
 .btn-outline-info {
-  color: var(--info);
-  border-color: var(--info);
+  background-color: transparent;
+  color: var(--info, #17a2b8);
+  border: 2px solid var(--info, #17a2b8);
 }
 .btn-outline-info:hover {
+  background-color: var(--info, #17a2b8);
   color: #fff;
-  background-color: var(--info);
-  border-color: var(--info);
 }
 
+/* ----------------------------------------
+   リンク風ボタン（履歴などに）
+---------------------------------------- */
+.btn-link {
+  background: none;
+  color: var(--info, #007bff);
+  text-decoration: underline;
+  font-weight: 500;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.btn-link:hover {
+  color: #0056b3;
+}
+
+
 /* ================================
-   6) フラッシュメッセージ
+ 6) フラッシュメッセージ
 =================================== */
 .alert {
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-sm);
+border-radius: var(--radius-sm);
+box-shadow: var(--shadow-sm);
 }
 
 /* ================================
-   7) ホームページ専用の軽い装飾
-   - 既存HTMLにクラスを少し足すと綺麗に
+ 7) ホームページ専用の軽い装飾
+ - 既存HTMLにクラスを少し足すと綺麗に
 =================================== */
 
 /* ヒーロー */
 .home-hero h1 {
-  letter-spacing: .02em;
+letter-spacing: .02em;
 }
 .home-hero .lead {
-  color: var(--muted);
+color: var(--muted);
 }
 
 /* 使い方リスト（<ol class="howto-list"> に変更するのがおすすめ） */
 .howto-list {
-  counter-reset: howto;
-  list-style: none;
-  padding-left: 0; /* Bootstrapのpl-3は不要に */
+counter-reset: howto;
+list-style: none;
+padding-left: 0; /* Bootstrapのpl-3は不要に */
 }
 .howto-list > li {
-  counter-increment: howto;
-  text-align: left;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-4);
-  margin-bottom: var(--space-3);
+counter-increment: howto;
+text-align: left;
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-sm);
+padding: var(--space-4);
+margin-bottom: var(--space-3);
 }
 .howto-list > li b {
-  display: inline-block;
-  margin-bottom: var(--space-2);
+display: inline-block;
+margin-bottom: var(--space-2);
 }
 .howto-list > li::before {
-  content: counter(howto);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  margin-right: var(--space-3);
-  background: var(--primary);
-  color: #fff;
-  border-radius: 50%;
-  font-weight: 700;
-}
-
-/* カード群の余白を少し統一 */
-.row .card.h-100 {
-  transition: transform .12s ease, box-shadow .12s ease;
-}
-.row .card.h-100:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+content: counter(howto);
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: 28px;
+height: 28px;
+margin-right: var(--space-3);
+background: var(--primary);
+color: #fff;
+border-radius: 50%;
+font-weight: 700;
 }
 
 /* ================================
-   8) フォーム（今後の入力画面用）
-=================================== */
-.form-control, input[type="text"], input[type="number"], textarea, select {
-  border-radius: var(--radius-sm);
-  border-color: var(--border);
-}
-.form-label {
-  font-weight: 600;
-}
-
-/* ================================
-   9) レスポンシブ調整
+ 9) レスポンシブ調整
 =================================== */
 @media (max-width: 768px) {
-  .card .card-body {
-    padding: var(--space-4);
-  }
-  .home-hero h1 {
-    font-size: clamp(1.75rem, 4.5vw, 2.25rem);
-  }
+.card .card-body {
+  padding: var(--space-4);
+}
+.home-hero h1 {
+  font-size: clamp(1.75rem, 4.5vw, 2.25rem);
+}
 }
 
 /* ================================
-   10) ダークテーマ（必要なら）
-   body に .theme-dark を付与すると有効化
+ 10) ダークテーマ（必要なら）
+ body に .theme-dark を付与すると有効化
 =================================== */
 .theme-dark {
-  --bg:        #0f1115;
-  --surface:   #151924;
-  --text:      #e5e7eb;
-  --muted:     #a3a3a3;
-  --border:    #222636;
+--bg:        #0f1115;
+--surface:   #151924;
+--text:      #e5e7eb;
+--muted:     #a3a3a3;
+--border:    #222636;
 
-  --primary:   #4caf50;
-  --primary-600: #43a047;
-  --info:      #3b82f6;
-  --danger:    #ef4444;
+--primary:   #4caf50;
+--primary-600: #43a047;
+--info:      #3b82f6;
+--danger:    #ef4444;
 }
 .theme-dark .card,
 .theme-dark .app-header,
 .theme-dark .app-footer {
-  box-shadow: none;
-}
- 
-/* リセット */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* 基本設定 */
-body {
-  font-family: "system-ui", "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  color: #333;
-  background-color: #f8f9fa;
-  line-height: 1.6;
-}
-
-/* コンテナ */
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* ヘッダー */
-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #dee2e6;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-}
-
-/* ボタン共通 */
-.btn {
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-weight: bold;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-success {
-  background-color: #38b000;
-  color: #fff;
-  border: none;
-}
-.btn-success:hover {
-  background-color: #2d8700;
-}
-
-.btn-primary {
-  background-color: #0d6efd;
-  color: #fff;
-  border: none;
-}
-.btn-primary:hover {
-  background-color: #0b5ed7;
-}
-
-.btn-info {
-  background-color: #0dcaf0;
-  color: #fff;
-  border: none;
-}
-.btn-info:hover {
-  background-color: #31d2f2;
-}
-
-.btn-outline-danger {
-  color: #dc3545;
-  border: 1px solid #dc3545;
-  background: transparent;
-}
-.btn-outline-danger:hover {
-  background-color: #dc3545;
-  color: white;
-}
-
-/* カード */
-.card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.card-title {
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-
-/* タイトルや見出し */
-h1, h2, h3, h4 {
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-.display-4 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #0d6efd;
-}
-
-/* フッター */
-footer {
-  background-color: #f1f3f5;
-  font-size: 14px;
-  color: #6c757d;
-}
-
-/* リストの説明欄 */
-ol li {
-  padding-left: 10px;
-  margin-bottom: 16px;
-  line-height: 1.8;
-}
-
-/* フラッシュメッセージ */
-.alert {
-  border-radius: 8px;
-  font-weight: 500;
-}
-
-.card {
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
-  margin-bottom: 20px;
-}
-
-.card h2 {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 8px; // タイトルと説明文の間
-}
-
-.card p {
-  margin-bottom: 16px; // 説明文とボタンの間
-  color: #555;
-}
-
-.card .btn {
-  padding: 10px 18px;
-  font-weight: bold;
-  border-radius: 8px;
-}
-
-.header {
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-  padding: 16px 24px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-}
-
-.nav-right .btn-logout {
-  background-color: #e53935;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-}
-
-.nav-right .btn-logout:hover {
-  background-color: #c62828;
-}
-
-.app-header {
-  position: sticky;
-  top: 0;
-  z-index: 1020;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-}
-
-.app-header .btn {
-  margin-left: 0.5rem;
-}
-
-.app-footer {
-  font-size: 0.85rem;
+box-shadow: none;
 }
