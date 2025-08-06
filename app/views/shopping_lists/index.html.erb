@@ -1,38 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<!-- app/views/shopping_lists/index.html.erb -->
 
-<h1>買い物リスト一覧</h1>
+<body class="shopping-lists-index">
 
-<%= link_to '新しいリストを作成', new_shopping_list_path %>
+  <p style="color: green"><%= notice %></p>
 
-<%= form_with url: shopping_lists_path, method: :get, local: true do %>
-  <%= month_field_tag :year_month, params[:year_month] %>
-  <%= submit_tag "検索" %>
-<% end %>
+  <h1 class="shopping-lists-header">買い物リスト一覧</h1>
 
-<% if params[:year_month].present? %>
-  <h3><%= params[:year_month] %>の予算合計：<%= @monthly_budget_total %>円</h3>
-<% end %>
+  <%= link_to '新しいリストを作成', new_shopping_list_path, class: "btn btn-edit" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>リスト名</th>
-      <th>予算</th>
-      <th>リスト作成日</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @shopping_lists.each do |list| %>
-      <tr>
-        <td><%= link_to list.name, before_shopping_shopping_list_path(list) %></td>
-        <td><%= list.budget %> 円</td>
-        <td><%= list.shopped_on %></td>
-        <td>
-          <%= link_to '編集', edit_shopping_list_path(list), style: 'display: inline; margin-right: 8px;' %>
-          <%= button_to '削除', shopping_list_path(list), method: :delete, data: { confirm: '本当に削除しますか？' }, form: { style: 'display: inline;' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <%= form_with url: shopping_lists_path, method: :get, local: true, html: { class: "shopping-lists-form" } do %>
+    <%= month_field_tag :year_month, params[:year_month] %>
+    <%= submit_tag "検索" %>
+  <% end %>
+
+  <% if params[:year_month].present? %>
+    <h3><%= params[:year_month] %>の予算合計：<%= @monthly_budget_total %>円</h3>
+  <% end %>
+
+  <% @shopping_lists.each do |list| %>
+    <div class="shopping-card">
+      <h3><%= link_to list.name, before_shopping_shopping_list_path(list) %></h3>
+      <p>予算：<%= list.budget %> 円</p>
+      <p>作成日：<%= list.shopped_on %></p>
+      <div class="actions">
+        <%= link_to '編集', edit_shopping_list_path(list), class: "btn btn-edit" %>
+        <%= button_to '削除', shopping_list_path(list), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-delete" %>
+      </div>
+    </div>
+  <% end %>
+</body>
