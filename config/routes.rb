@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   root "home#index"
   get 'home/index'
-  resources :shopping_lists, except: [:show] do
+  resources :shopping_lists do
     member do
       get :before_shopping   # 買い物前
       get :during_shopping   # 買い物中

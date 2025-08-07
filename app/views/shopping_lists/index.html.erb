@@ -17,15 +17,22 @@
     <h3><%= params[:year_month] %>の予算合計：<%= @monthly_budget_total %>円</h3>
   <% end %>
 
-  <% @shopping_lists.each do |list| %>
-    <div class="shopping-card">
-      <h3><%= link_to list.name, before_shopping_shopping_list_path(list) %></h3>
-      <p>予算：<%= list.budget %> 円</p>
-      <p>作成日：<%= list.shopped_on %></p>
-      <div class="actions">
-        <%= link_to '編集', edit_shopping_list_path(list), class: "btn btn-edit" %>
-        <%= button_to '削除', shopping_list_path(list), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-delete" %>
+  <!-- 既存の繰り返し処理の中で -->
+<% @shopping_lists.each do |list| %>
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body">
+    <h5 class="card-title">
+    <%= link_to list.name, before_shopping_shopping_list_path(list) %>
+    </h5>
+    <p class="card-text">予算：<%= number_to_currency(list.budget, unit: "¥", precision: 0) %></p>
+      <div class="d-flex justify-content-end">
+        <%= link_to "編集", edit_shopping_list_path(list), class: "btn btn-edit" %>
+        <%= link_to "削除", shopping_list_path(list),
+                    method: :delete,
+                    data: { confirm: "本当に削除しますか？" },
+                    class: "btn btn-delete" %>
       </div>
     </div>
-  <% end %>
+  </div>
+<% end %>
 </body>

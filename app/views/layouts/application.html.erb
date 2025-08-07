@@ -10,26 +10,26 @@
   </head>
 
   <body class="bg-light text-dark">
+
     <% if user_signed_in? %>
-      <!-- ナビゲーション（ログイン時のみ） -->
-      <header class="app-header bg-white border-bottom shadow-sm py-3 mb-4">
-        <div class="container d-flex align-items-center justify-content-between">
-          <div class="left">
-            <%= link_to "ToDoEasy", root_path, class: "btn btn-outline-primary me-2" %>
+      <!-- ナビゲーション -->
+      <header class="app-header">
+        <div class="header-container">
+          <!-- 左：ロゴ -->
+          <%= link_to "ToDoEasy", root_path, class: "app-logo" %>
+
+          <!-- 中央：あいさつ -->
+          <div class="header-user">
+            こんにちは、<%= (current_user&.nickname.presence || current_user&.email) %> さん
           </div>
-          <div class="center mx-auto text-center">
-            <span class="me-3">
-              こんにちは、<%= (current_user&.nickname.presence || current_user&.email) %> さん
-            </span>
-          </div>
-          <div class="right ms-auto">
-            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
-          </div>
+
+          <!-- 右：ログアウト -->
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-btn" %>
         </div>
       </header>
     <% end %>
 
-    <!-- フラッシュメッセージ（ログイン状態問わず表示） -->
+    <!-- フラッシュメッセージ -->
     <div class="container">
       <% if flash[:notice] %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,10 +45,12 @@
       <% end %>
     </div>
 
+    <!-- メインコンテンツ -->
     <main class="container mb-5">
       <%= yield %>
     </main>
 
+    <!-- フッター -->
     <footer class="app-footer bg-white border-top text-center text-muted py-3">
       <small>&copy; 2025 ToDoEasy. All rights reserved.</small>
     </footer>
