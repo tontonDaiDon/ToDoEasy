@@ -2,7 +2,6 @@
 
 <body class="shopping-lists-index">
 
-  <p style="color: green"><%= notice %></p>
 
   <h1 class="shopping-lists-header">買い物リスト一覧</h1>
 
@@ -18,21 +17,32 @@
   <% end %>
 
   <!-- 既存の繰り返し処理の中で -->
-<% @shopping_lists.each do |list| %>
-  <div class="card mb-3 shadow-sm">
-    <div class="card-body">
-    <h5 class="card-title">
-    <%= link_to list.name, before_shopping_shopping_list_path(list) %>
-    </h5>
-    <p class="card-text">予算：<%= number_to_currency(list.budget, unit: "¥", precision: 0) %></p>
-      <div class="d-flex justify-content-end">
-        <%= link_to "編集", edit_shopping_list_path(list), class: "btn btn-edit" %>
-        <%= link_to "削除", shopping_list_path(list),
-                    method: :delete,
-                    data: { confirm: "本当に削除しますか？" },
-                    class: "btn btn-delete" %>
+  <div class="list-container">
+  <% @shopping_lists.each do |list| %>
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= link_to list.name, before_shopping_shopping_list_path(list) %>
+        </h5>
+  
+        <!-- 作成日を表示 -->
+        <p class="card-text text-muted mb-1">
+          作成日：<%= list.created_at.strftime("%Y年%m月%d日") %>
+        </p>
+  
+        <!-- 予算を表示 -->
+        <p class="card-text">予算：<%= number_to_currency(list.budget, unit: "¥", precision: 0) %></p>
+  
+        <div class="d-flex justify-content-end">
+          <%= link_to "編集", edit_shopping_list_path(list), class: "btn btn-edit" %>
+  
+          <%= button_to "削除", shopping_list_path(list),
+                        method: :delete,
+                        form: { data: { turbo_confirm: "本当に削除しますか？" }, class: "d-inline" },
+                        class: "btn btn-delete" %>
+        </div>
       </div>
     </div>
+  <% end %>
   </div>
-<% end %>
 </body>

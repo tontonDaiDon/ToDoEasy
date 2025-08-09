@@ -7,15 +7,23 @@
   </div>
   <div>
     <%= form.label :budget, "予算（円）" %><br>
-    <%= form.number_field :budget %>
-  </div>
-  <div>
-    <%= form.label :shopped_on, "リスト作成日" %>
-    <%= form.date_field :shopped_on %>
+    <%= form.number_field :budget, min: 0, class: "no-spin" %>
   </div>
   <div>
     <%= form.submit "作成" %>
   </div>
 <% end %>
+
+<% if @shopping_list.errors.any? %>
+  <div class="error-messages">
+    <h2><%= @shopping_list.errors.count %>件のエラーがあります</h2>
+    <ul>
+      <% @shopping_list.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 
 <%= link_to '一覧に戻る', shopping_lists_path %>

@@ -1,8 +1,9 @@
 <h1>買い物リスト詳細</h1>
 
-<%= link_to '買い物前', before_shopping_shopping_list_path(@shopping_list) %> |
-<%= link_to '買い物中', during_shopping_shopping_list_path(@shopping_list) %> |
-<%= link_to '買い物後', after_shopping_shopping_list_path(@shopping_list) %>
+<%= link_to '買い物前', before_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-before" %> |
+<%= link_to '買い物中', during_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-during" %> |
+<%= link_to '買い物後', after_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-after" %>
+
 
 <h2>買い物アイテム一覧</h2>
 <%= form_with url: update_items_shopping_list_path(@shopping_list), method: :patch, local: true do %>

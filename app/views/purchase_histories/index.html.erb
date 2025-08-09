@@ -9,6 +9,11 @@
     <%= submit_tag "検索" %>
   <% end %>
 
+  <% if params[:year_month].present? %>
+    <h3><%= params[:year_month] %>の買い物合計：<%= @monthly_total_price %>円</h3>
+  <% end %>
+  
+  <div class="history-container">
   <% @purchase_histories.each do |history| %>
     <div class="card">
       <h4>購入日：<%= history.purchased_on %></h4>
@@ -18,8 +23,7 @@
       <p><strong>メモ：</strong><%= history.note.presence || "なし" %></p>
     </div>
   <% end %>
+  </div>
 
-  <% if params[:year_month].present? %>
-    <h3><%= params[:year_month] %>の買い物合計：<%= @monthly_total_price %>円</h3>
-  <% end %>
+  
 </body>

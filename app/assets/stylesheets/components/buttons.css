@@ -49,3 +49,19 @@
     background-color: #a71d2a;
   }
   
+  .logout-btn {
+    padding: var(--space-2) var(--space-3);
+    font-size: 1rem;
+    border-radius: var(--radius-sm);
+  }
+  
+  
+  
+
+  /* 小さい画面でボタンを画面幅いっぱいに */
+  @media (max-width: 480px) {
+    .logout-btn {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }

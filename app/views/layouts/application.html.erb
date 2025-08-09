@@ -11,23 +11,25 @@
 
   <body class="bg-light text-dark">
 
-    <% if user_signed_in? %>
-      <!-- ナビゲーション -->
-      <header class="app-header">
-        <div class="header-container">
-          <!-- 左：ロゴ -->
-          <%= link_to "ToDoEasy", root_path, class: "app-logo" %>
+  <% if user_signed_in? %>
+  <!-- ナビゲーション -->
+  <header class="app-header d-flex align-items-center justify-content-between px-3 py-2">
+    <!-- 左：トップに戻る -->
+    <div>
+      <%= link_to 'トップに戻る', root_path, class: "btn-top" %>
+    </div>
 
-          <!-- 中央：あいさつ -->
-          <div class="header-user">
-            こんにちは、<%= (current_user&.nickname.presence || current_user&.email) %> さん
-          </div>
+    <!-- 中央：あいさつ -->
+    <div class="header-user text-center flex-grow-1">
+      こんにちは、<%= (current_user&.nickname.presence || current_user&.email) %> さん
+    </div>
 
-          <!-- 右：ログアウト -->
-          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-btn" %>
-        </div>
-      </header>
-    <% end %>
+    <!-- 右：ログアウト -->
+    <div>
+      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-btn" %>
+    </div>
+  </header>
+<% end %>
 
     <!-- フラッシュメッセージ -->
     <div class="container">
