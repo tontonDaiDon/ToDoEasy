@@ -5,7 +5,7 @@
 
   <h1 class="shopping-lists-header">買い物リスト一覧</h1>
 
-  <%= link_to '新しいリストを作成', new_shopping_list_path, class: "btn btn-edit" %>
+  <%= link_to '新しいリストを作成', new_shopping_list_path, class: "btn btn-edit mb-1" %>
 
   <%= form_with url: shopping_lists_path, method: :get, local: true, html: { class: "shopping-lists-form" } do %>
     <%= month_field_tag :year_month, params[:year_month] %>
@@ -34,8 +34,7 @@
         <p class="card-text">予算：<%= number_to_currency(list.budget, unit: "¥", precision: 0) %></p>
   
         <div class="d-flex justify-content-end">
-          <%= link_to "編集", edit_shopping_list_path(list), class: "btn btn-edit" %>
-  
+          <%= link_to "編集", edit_shopping_list_path(list), class: "btn btn-edit mb-1" %>
           <%= button_to "削除", shopping_list_path(list),
                         method: :delete,
                         form: { data: { turbo_confirm: "本当に削除しますか？" }, class: "d-inline" },
