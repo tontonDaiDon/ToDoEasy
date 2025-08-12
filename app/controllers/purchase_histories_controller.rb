@@ -33,7 +33,7 @@ class PurchaseHistoriesController < ApplicationController
   end
 
   def index
-    @purchase_histories = PurchaseHistory.order(purchased_on: :asc)
+    @purchase_histories = PurchaseHistory.order(purchased_on: :desc)
     if params[:year_month].present?
       year, month = params[:year_month].split('-')
       start_date = Date.new(year.to_i, month.to_i, 1)

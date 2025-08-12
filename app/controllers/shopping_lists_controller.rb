@@ -3,7 +3,7 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists or /shopping_lists.json
   def index
-    @shopping_lists = ShoppingList.order(created_at: :asc)
+    @shopping_lists = ShoppingList.order(created_at: :desc)
     if params[:year_month].present?
       year, month = params[:year_month].split('-')
       start_date = Date.new(year.to_i, month.to_i, 1)

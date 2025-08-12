@@ -68,14 +68,14 @@
         </div>
 
       <% else %>
-        <!-- ✅ 未ログインユーザー向け表示：B案（シンプル導線のみ） -->
+        <!-- ✅ 未ログインユーザー向け表示 -->
         <div class="card shadow-sm mb-4">
           <div class="card-body text-center">
             <h2 class="h4 mb-3">まずは始めてみましょう</h2>
             <p class="mb-4">ご利用にはログインまたは新規登録が必要です。</p>
             <div class="d-flex justify-content-center gap-3 flex-wrap">
-              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success px-4 mb-2" %>
-              <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-info px-4 mb-2" %>
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success px-4 mb-1" %>
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-info px-4 mb-1" %>
             </div>
           </div>
         </div>

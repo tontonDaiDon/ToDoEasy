@@ -16,7 +16,7 @@
   <header class="app-header d-flex align-items-center justify-content-between px-3 py-2">
     <!-- 左：トップに戻る -->
     <div>
-      <%= link_to 'トップに戻る', root_path, class: "btn-top" %>
+      <%= link_to 'トップに戻る', root_path, class: "btn btn-top" %>
     </div>
 
     <!-- 中央：あいさつ -->
@@ -26,7 +26,7 @@
 
     <!-- 右：ログアウト -->
     <div>
-      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-btn" %>
+      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-btn btn-logout" %>
     </div>
   </header>
 <% end %>

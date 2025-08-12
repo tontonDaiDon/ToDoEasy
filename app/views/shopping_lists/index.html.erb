@@ -5,7 +5,7 @@
 
   <h1 class="shopping-lists-header">買い物リスト一覧</h1>
 
-  <%= link_to '新しいリストを作成', new_shopping_list_path, class: "btn btn-edit mb-1" %>
+  <%= link_to '新しいリストを作成', new_shopping_list_path, class: "btn btn-new mb-1" %>
 
   <%= form_with url: shopping_lists_path, method: :get, local: true, html: { class: "shopping-lists-form" } do %>
     <%= month_field_tag :year_month, params[:year_month] %>
