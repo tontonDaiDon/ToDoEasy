@@ -1,5 +1,3 @@
-# Additional translations at https://github.com/heartcombo/devise/wiki/I18n
-
 ja:
   devise:
     confirmations:
@@ -36,6 +34,17 @@ ja:
       send_paranoid_instructions: "メールアドレスが登録済みの場合、パスワードの再設定について数分以内にメールでご連絡します。"
       updated: "パスワードが正しく変更されました。"
       updated_not_active: "パスワードが正しく変更されました。"
+      new:
+        title: "パスワード再設定"
+        description: "登録済みのメールアドレスを入力してください。パスワード再設定用のリンクをお送りします。"
+        email_label: "メールアドレス"
+        send_button: "送信"
+      edit:
+        title: "新しいパスワードを設定"
+        description: "新しいパスワードを入力してください。"
+        password_label: "新しいパスワード"
+        password_confirmation_label: "新しいパスワード（確認）"
+        change_button: "パスワードを変更"
     registrations:
       destroyed: "アカウントを削除しました。またのご利用をお待ちしております。"
       signed_up: "アカウント登録が完了しました。"
@@ -45,7 +54,21 @@ ja:
       update_needs_confirmation: "アカウント情報を変更しました。新しいメールアドレスを確認するまでログインできません。"
       updated: "アカウント情報を変更しました。"
       updated_but_not_signed_in: "アカウント情報を変更しましたが、再ログインが必要です。"
+      new:
+        title: "新規登録"
+        description: "必要事項を入力してアカウントを作成してください。"
+        username_label: "ユーザー名"
+        email_label: "メールアドレス"
+        password_label: "パスワード"
+        password_confirmation_label: "パスワード（確認）"
+        sign_up_button: "登録する"
     sessions:
+      new:
+        sign_in: "ログイン"
+      shared:
+        links:
+          sign_up: "新規登録"
+          forgot_your_password: "パスワードをお忘れですか？"
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
       already_signed_out: "すでにログアウトしています。"
