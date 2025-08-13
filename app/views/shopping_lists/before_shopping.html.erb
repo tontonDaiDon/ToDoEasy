@@ -8,21 +8,30 @@
 <p><strong>リスト名：</strong> <%= @shopping_list.name %></p>
 <p><strong>予算：</strong> <%= @shopping_list.budget %> 円</p>
 
-<%= link_to '編集', edit_shopping_list_path(@shopping_list) %> 
-<%= button_to 'この買い物リストを削除', @shopping_list, method: :delete, data: { confirm: '本当に削除しますか？' } %>
+<div class="form-actions">
+    <%= link_to '編集', edit_shopping_list_path(@shopping_list), class: "btn btn-edit mb-1" %>
+    <%= button_to 'この買い物リストを削除',
+              shopping_list_path(@shopping_list),
+              method: :delete,
+              data: { confirm: '本当に削除しますか？' },
+              form: { data: { turbo: false } },
+              class: "btn btn-delete mb-1" %>
+  </div> 
 
-<h2>買い物アイテム一覧</h2>
-<ul>
-  <% @items.each do |item| %>
-    <% next if item.id.nil? %>
-    <li>
-      <%= item.name %>（<%= item.quantity %>個）
-      <%= link_to '編集', edit_shopping_list_item_path(@shopping_list, item) %>
-    </li>
-  <% end %>
-</ul>
+<div class="card mb-3 p-3">
+  <h2>買い物アイテム一覧</h2> 
+  <ul class="mb-3">
+    <% @items.each do |item| %>
+      <% next if item.id.nil? %>
+      <li class="mb-2">
+        <%= item.name %>（<%= item.quantity %>個）
+        <%= link_to '編集', edit_shopping_list_item_path(@shopping_list, item) %>
+      </li>
+    <% end %>
+  </ul>
 
-<%= link_to 'アイテムを追加', new_shopping_list_item_path(@shopping_list) %>
+  <%= link_to 'アイテムを追加', new_shopping_list_item_path(@shopping_list), class: "btn btn-success" %>
+</div>
 
 <% if @item && @item.errors.any? %>
   <div style="color: red;">
@@ -39,5 +48,5 @@
 <% end %>
 
 <div style="margin-top: 32px;">
-  <%= link_to '一覧に戻る', shopping_lists_path %>
+  <%= link_to '一覧に戻る', shopping_lists_path, class: "btn btn-backindex" %>
 </div> 

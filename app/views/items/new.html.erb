@@ -8,8 +8,9 @@
     <%= form.label :quantity, "数量" %>
     <%= form.number_field :quantity, value: 1, min: 1 %>
   </div>
-  <div>
-    <%= form.submit "追加" %>
+  <br>
+  <div class="form-actions">
+    <%= form.submit "追加", class: "btn btn-new" %>
+    <%= link_to '買い物前に戻る', before_shopping_shopping_list_path(@shopping_list), class: "btn btn-backindex" %>
   </div>
 <% end %>
-<%= link_to '買い物前に戻る', before_shopping_shopping_list_path(@shopping_list) %>

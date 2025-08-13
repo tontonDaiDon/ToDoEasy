@@ -26,19 +26,24 @@
   <% end %>
 </p>
 
-<%= link_to '買い物履歴を記録する', new_shopping_list_purchase_history_path(@shopping_list) %>
+<%= link_to '買い物memoを記録する', new_shopping_list_purchase_history_path(@shopping_list), class:"btn btn-new" %>
 
+<div class="card mb-3 p-3">
 <% if @purchase_history %>
   <p>購入日：<%= @purchase_history.purchased_on %></p>
   <p>買った場所：<%= @purchase_history.place %></p>
   <p>メモ：<%= @purchase_history.note %></p>
-  <%= link_to '履歴を編集', edit_shopping_list_purchase_history_path(@shopping_list, @purchase_history) %>
   <% if @purchase_history.receipt_image.attached? %>
     <p>レシート画像：</p>
     <%= image_tag @purchase_history.receipt_image, style: "max-width: 300px;" %>
   <% end %>
 <% end %>
+</div>
+<% if @purchase_history.present? %>
+  <%= link_to '履歴を編集', edit_shopping_list_purchase_history_path(@shopping_list, @purchase_history),
+      class: "btn btn-edit" %>
+<% end %>
 
 <div style="margin-top: 32px;">
-  <%= link_to '一覧に戻る', shopping_lists_path %>
+  <%= link_to '一覧に戻る', shopping_lists_path, class: "btn btn-backindex" %>
 </div>

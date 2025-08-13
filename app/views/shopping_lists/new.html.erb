@@ -7,10 +7,13 @@
   </div>
   <div>
     <%= form.label :budget, "予算（円）" %><br>
-    <%= form.number_field :budget, min: 0, class: "no-spin" %>
+    <%= form.number_field :budget, min: 0, class: "no-spin mb-1" %>
   </div>
-  <div>
-    <%= form.submit "作成" %>
+
+  <!-- ボタンを横並びにするコンテナ -->
+  <div class="form-actions">
+    <%= form.submit "作成", class: "btn btn-new" %>
+    <%= link_to '一覧に戻る', shopping_lists_path, class: "btn btn-backindex" %>
   </div>
 <% end %>
 
@@ -24,6 +27,3 @@
     </ul>
   </div>
 <% end %>
-
-
-<%= link_to '一覧に戻る', shopping_lists_path %>

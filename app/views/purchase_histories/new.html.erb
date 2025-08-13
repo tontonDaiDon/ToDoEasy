@@ -1,4 +1,4 @@
-<h2>買い物履歴を記録する</h2>
+<h2>買い物memoを記録する</h2>
 <%= form_with(model: [@shopping_list, @purchase_history], local: true, multipart: true) do |form| %>
   <div>
     <%= form.label :purchased_on, "購入日" %>
@@ -16,8 +16,9 @@
     <%= form.label :receipt_image, "レシート画像" %>
     <%= form.file_field :receipt_image %>
   </div>
-  <div>
-    <%= form.submit "履歴を保存" %>
+  <br>
+  <div class="form-actions">
+    <%= form.submit "memoを保存", class: "btn btn-new" %>
+    <%= link_to '買い物後に戻る', after_shopping_shopping_list_path(@shopping_list) , class: "btn btn-backindex" %>
   </div>
 <% end %>
-<%= link_to '買い物後に戻る', after_shopping_shopping_list_path(@shopping_list) %>

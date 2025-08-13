@@ -9,11 +9,20 @@
     <%= form.label :budget, "予算（円）" %><br>
     <%= form.number_field :budget %>
   </div>
-  <div>
-    <%= form.submit "更新" %>
+  <br>
+  <div class="form-actions">
+    <%= form.submit "更新", class: "btn btn-success mb-1" %>
+    <%= button_to 'このリストを削除',
+              shopping_list_path(@shopping_list),
+              method: :delete,
+              data: { confirm: '本当に削除しますか？' },
+              form: { data: { turbo: false } },
+              class: "btn btn-delete mb-1" %>
   </div>
 <% end %>
 
-<%= link_to '一覧に戻る', shopping_lists_path %>
-<br>
-<%= button_to 'このリストを削除', shopping_list_path(@shopping_list), method: :delete, data: { confirm: '本当に削除しますか？' }, form: { data: { turbo: false } }, style: "color: red;" %>
+
+    
+    <%= link_to '一覧に戻る', shopping_lists_path, class: "btn btn-backindex" %>
+
+
