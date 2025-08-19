@@ -46,9 +46,24 @@ a:hover {
 
   --primary:       #4caf50;
   --primary-600:   #43a047;
+  --primary-500:   #66bb6a; /* 明るめの緑 */
   --success:       #2e7d32;
   --info:          #0d6efd;
+  --info-500:      #4da3ff; /* 明るめの青 */
   --danger:        #dc3545;
+  --danger-500:    #ef5350; /* 明るめの赤 */
+  --warning:       #ff9800;
+  --warning-500:   #ffb74d; /* 明るめのオレンジ */
+  --secondary:     #adb5bd; /* 明るめのグレーで暗さを軽減 */
+  --secondary-500: #c7ced4; /* さらに明るめ */
+  --list:          #0d6efd; /* ショッピングリスト用（青） */
+  --list-light:    #4da3ff; /* リスト用 明るめ青 */
+  --history:       #17a2b8; /* 購入履歴用（シアン） */
+  --history-light: #20c997; /* 履歴用 明るめシアン */
+  --accent:        #8e5cf6; /* 履歴CTA用の専用色（バイオレット） */
+  --accent-600:    #6f42c1;
+  --pink:          #ff69b4; /* トップに戻る（ピンク） */
+  --pink-600:      #e7549e;
 
   /* Radius */
   --radius-sm:     8px;
@@ -126,6 +141,45 @@ main.container {
   background: var(--surface);
   border-top: 1px solid var(--border);
   color: var(--muted);
+}
+
+/* ================================
+  2.5) フォーム（入力・ラベル・アクション）
+=================================== */
+label {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--info);
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: var(--space-4);
 }
 
 /* ================================
@@ -246,6 +300,29 @@ body.purchase-histories-index {
   color: #333;
 }
 
+/* ページ別ボタンカラーの上書き（視覚的に用途を分離） */
+body.shopping-lists-index .btn-primary,
+body.shopping-lists-index .btn-info,
+body.shopping-lists-index .btn-edit {
+  background-color: var(--list-light);
+}
+body.shopping-lists-index .btn-primary:hover,
+body.shopping-lists-index .btn-info:hover,
+body.shopping-lists-index .btn-edit:hover {
+  background-color: var(--list); /* 青のホバー */
+}
+
+body.purchase-histories-index .btn-primary,
+body.purchase-histories-index .btn-info,
+body.purchase-histories-index .btn-edit {
+  background-color: var(--history-light);
+}
+body.purchase-histories-index .btn-primary:hover,
+body.purchase-histories-index .btn-info:hover,
+body.purchase-histories-index .btn-edit:hover {
+  background-color: var(--history); /* シアンのホバー */
+}
+
 .purchase-histories-header {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -363,26 +440,49 @@ body.shopping-lists-index {
   padding: 8px 16px;
   border-radius: 6px;
   font-weight: bold;
-  color: white;
+  color: #fff;
   text-decoration: none;
   margin-right: 8px;
   transition: background-color 0.3s ease;
   display: inline-block;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border: 2px solid transparent;
+}
+
+.stage-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+/* 非アクティブは通常表示（視認性重視で減彩はしない） */
+
+.btn-status.is-active {
+  transform: scale(1.06);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  color: #000;            /* 黒字で強調 */
+  background-color: #fff; /* 反転させて目立たせる */
 }
 
 .btn-before {
-  background-color: hwb(0 0% 0%); /* 青 */
+  background-color: var(--danger-500); /* 赤 */
 }
+.btn-before:hover { background-color: var(--danger); }
+.btn-before.is-active { border-color: var(--danger); }
 
 
 .btn-during {
-  background-color: #9961db; /* 緑 */
+  background-color: var(--warning-500); /* 黄 */
 }
+.btn-during:hover { background-color: var(--warning); }
+.btn-during.is-active { border-color: var(--warning); }
 
 .btn-after {
-  background-color: #4cb981; /* 赤 */
+  background-color: var(--primary-500); /* 緑 */
 }
+.btn-after:hover { background-color: var(--primary-600); }
+.btn-after.is-active { border-color: var(--primary-600); }
 
 
 /* 共通ボタンスタイル */
@@ -396,9 +496,11 @@ body.shopping-lists-index {
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, filter 0.15s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-right: 6px;
+  line-height: 1.2;           /* 高さのバラつきを抑制 */
+  vertical-align: middle;     /* インライン配置での上下ズレ防止 */
 }
 
 /* 押した感 */
@@ -407,42 +509,79 @@ body.shopping-lists-index {
 }
 
 /* 色バリエーション */
-.btn-primary,
+.btn-history {
+  background-color: var(--accent);
+  color: #fff;
+}
+.btn-history:hover {
+  background-color: var(--accent-600);
+}
+.btn-primary {
+  background-color: var(--info-500);
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: var(--info);
+}
+
 .btn-outline-info {
-  background-color: #007bff;
-  color: white;
+  background-color: transparent;
+  border: 2px solid var(--info);
+  color: var(--info);
+}
+.btn-outline-info:hover {
+  background-color: var(--info);
+  color: #fff;
 }
 
-.btn-success,
+.btn-success {
+  background-color: var(--primary-500);
+  color: #fff;
+}
+.btn-success:hover {
+  background-color: var(--primary-600);
+}
 .btn-logout {
-  background-color: #00ff08;
-  color: white;
+  background-color: var(--danger-500);
+  color: #fff;
+}
+.btn-logout:hover,
+.btn-delete:hover {
+  background-color: var(--danger);
 }
 
-.btn-info,
-.btn-top {
-  background-color: #ff0000; /* 赤 */
-  color: white;
+.btn-info {
+  background-color: var(--info-500);
+  color: #fff;
+}
+.btn-info:hover,
+.btn-edit:hover {
+  background-color: var(--info);
 }
 
 .btn-edit {
-  background-color: #ff00b3;
-  color: white;
+  background-color: var(--info-500);
+  color: #fff;
 }
 
 .btn-new {
-  background-color: #1f9e29;
-  color: white;
+  background-color: var(--primary-500);
+  color: #fff;
+}
+.btn-new:hover {
+  background-color: var(--primary-600);
 }
 
 .btn-delete {
-  background-color: #6753ff;
-  color: white;
+  background-color: var(--danger-500);
+  color: #fff;
 }
 
 .btn-backindex {
-  background-color: #ff6a6a;
-  color: white;
+  background-color: var(--warning-500);
+  color: #fff;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; /* 明示して上下の伸びを抑える */
 }
 
 .btn-top,
@@ -462,8 +601,17 @@ body.shopping-lists-index {
 
 /* トップに戻るボタン（オレンジ系） */
 .btn-top {
-  background-color: #ff9800;
-  color: white;
+  background-color: var(--pink);
+  color: #fff;
+}
+.btn-top:hover { background-color: var(--pink-600); }
+.btn-backindex:hover,
+.btn-secondary:hover { background-color: var(--warning); }
+
+/* 汎用セカンダリ */
+.btn-secondary {
+  background-color: var(--secondary);
+  color: #fff;
 }
 
 /* ログアウトボタン（赤系） */
@@ -501,13 +649,16 @@ body.shopping-lists-index {
   margin-left: auto;              /* 右端へ寄せる */
 }
 
-.form-actions {
-  display: flex;
-  gap: 10px; /* ボタン間の隙間 */
-}
-
 .form-actions .btn {
   flex-shrink: 0; /* ボタン幅が潰れないようにする */
+}
+
+/* 無効状態 */
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 

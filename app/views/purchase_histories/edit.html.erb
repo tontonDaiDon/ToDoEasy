@@ -1,23 +1,26 @@
-<h2>履歴を編集</h2>
+<h2 class="mb-1">履歴を編集</h2>
+
+<div class="card mb-3 p-3">
 <%= form_with(model: [@shopping_list, @purchase_history], local: true, multipart: true) do |form| %>
-  <div>
-    <%= form.label :purchased_on, "購入日" %>
+  <div class="mb-1">
+    <%= form.label :purchased_on, "購入日" %><br>
     <%= form.date_field :purchased_on %>
   </div>
-  <div>
-    <%= form.label :place, "買った場所" %>
+  <div class="mb-1">
+    <%= form.label :place, "買った場所" %><br>
     <%= form.text_field :place %>
   </div>
-  <div>
-    <%= form.label :note, "メモ" %>
+  <div class="mb-1">
+    <%= form.label :note, "メモ" %><br>
     <%= form.text_area :note %>
   </div>
-  <div>
-    <%= form.label :receipt_image, "レシート画像" %>
+  <div class="mb-1">
+    <%= form.label :receipt_image, "レシート画像" %><br>
     <%= form.file_field :receipt_image %>
   </div>
-  <div>
-    <%= form.submit "更新" %>
+  <div class="form-actions">
+    <%= form.submit "更新", class: "btn btn-success" %>
+    <%= link_to '買い物後に戻る', after_shopping_shopping_list_path(@shopping_list), class: "btn btn-backindex" %>
   </div>
 <% end %>
-<%= link_to '買い物後に戻る', after_shopping_shopping_list_path(@shopping_list) %>
+</div>

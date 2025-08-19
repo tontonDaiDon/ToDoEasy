@@ -33,13 +33,7 @@
         <!-- 予算を表示 -->
         <p class="card-text">予算：<%= number_to_currency(list.budget, unit: "¥", precision: 0) %></p>
   
-        <div class="d-flex justify-content-end">
-          <%= link_to "編集", edit_shopping_list_path(list), class: "btn btn-edit mb-1" %>
-          <%= button_to "削除", shopping_list_path(list),
-                        method: :delete,
-                        form: { data: { turbo_confirm: "本当に削除しますか？" }, class: "d-inline" },
-                        class: "btn btn-delete" %>
-        </div>
+        <!-- 詳細ページに編集/削除があるため一覧では操作ボタンを非表示にしました -->
       </div>
     </div>
   <% end %>

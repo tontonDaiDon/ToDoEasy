@@ -1,5 +1,10 @@
 class ShoppingListsController < ApplicationController
-  before_action :set_shopping_list, only: %i[ show edit update destroy ]
+  before_action :set_shopping_list, only: %i[
+    show edit update destroy
+    before_shopping during_shopping after_shopping update_items
+  ]
+
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET /shopping_lists or /shopping_lists.json
   def index
@@ -36,10 +41,9 @@ class ShoppingListsController < ApplicationController
 
   # PATCH/PUT /shopping_lists/1 or /shopping_lists/1.json
   def update
-    @shopping_list = ShoppingList.find(params[:id])
-      if @shopping_list.update(shopping_list_params)
-      redirect_to before_shopping_shopping_list_path(@shopping_list), notice: 'リストを更新しました'
-      else
+    if @shopping_list.update(shopping_list_params)
+      redirect_to shopping_lists_path, notice: 'リストを更新しました'
+    else
       render :edit
     end
   end
@@ -52,13 +56,11 @@ class ShoppingListsController < ApplicationController
   end
 
   def before_shopping
-    @shopping_list = ShoppingList.find(params[:id])
     @items = @shopping_list.items
     @item = @shopping_list.items.build
   end
 
   def during_shopping
-    @shopping_list = ShoppingList.find(params[:id])
     @items = @shopping_list.items
     @total = @items.select { |item| item.purchased && item.price.present? }
                    .sum { |item| item.price.to_i * (item.quantity || 1) }
@@ -73,7 +75,6 @@ class ShoppingListsController < ApplicationController
   end
 
   def after_shopping
-    @shopping_list = ShoppingList.find(params[:id])
     @items = @shopping_list.items
     @total = @items.select { |item| item.purchased && item.price.present? }
                    .sum { |item| item.price.to_i * (item.quantity || 1) }
@@ -83,7 +84,6 @@ class ShoppingListsController < ApplicationController
   end
 
   def update_items
-    @shopping_list = ShoppingList.find(params[:id])
     params[:items]&.each do |id, item_params|
       item = @shopping_list.items.find(id)
       item.update(
@@ -102,6 +102,10 @@ class ShoppingListsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_shopping_list
       @shopping_list = ShoppingList.find(params[:id])
+    end
+
+    def record_not_found
+      redirect_to shopping_lists_path, alert: '指定のリストが見つかりません。'
     end
 
     # Only allow a list of trusted parameters through.

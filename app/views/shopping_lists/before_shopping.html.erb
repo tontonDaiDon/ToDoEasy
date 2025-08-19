@@ -1,8 +1,10 @@
 <h1>買い物リスト詳細</h1>
 
-<%= link_to '買い物前', before_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-before" %> |
-<%= link_to '買い物中', during_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-during" %> |
-<%= link_to '買い物後', after_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-after" %>
+<div class="stage-nav">
+  <%= link_to '買い物前', before_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-before is-active" %>
+  <%= link_to '買い物中', during_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-during" %>
+  <%= link_to '買い物後', after_shopping_shopping_list_path(@shopping_list), class: "btn-status btn-after" %>
+</div>
 
 
 <p><strong>リスト名：</strong> <%= @shopping_list.name %></p>
