@@ -481,7 +481,7 @@ body.purchase-histories-index .btn-edit:hover {
 
 .history-card .price {
   font-weight: bold;
-  color: #d9534f;
+  color: #e35853;
 }
 
 body.shopping-lists-index {
@@ -659,7 +659,6 @@ body.shopping-lists-index {
   color: #fff;
 }
 
-
 .btn-top,
 .logout-btn {
   appearance: none;          /* ブラウザ標準のボタンスタイルを消す */
@@ -681,7 +680,6 @@ body.shopping-lists-index {
   background-color: var(--pink);
   color: #fff;
 }
-
 
 /* 汎用セカンダリ */
 .btn-secondary {
