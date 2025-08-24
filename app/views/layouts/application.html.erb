@@ -15,7 +15,7 @@
   <!-- ナビゲーション -->
   <header class="app-header d-flex align-items-center justify-content-between px-3 py-2">
     <!-- 左：トップに戻る -->
-    <div>
+    <div class="nav-left">
       <%= link_to 'トップに戻る', root_path, class: "btn btn-top" %>
     </div>
 
@@ -25,9 +25,20 @@
     </div>
 
     <!-- 右：ログアウト -->
-    <div>
+    <div class="nav-right">
       <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-btn btn-logout" %>
     </div>
+
+    <!-- ハンバーガーボタン（スマホ用） -->
+    <button class="menu-toggle" aria-label="メニューを開閉">☰</button>
+  
+    <!-- スマホ用メニュー -->
+    <nav class="menu">
+      <ul>
+        <li><%= link_to 'トップに戻る', root_path, class: "btn btn-top" %></li>
+        <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout-btn btn-logout" %></li>
+      </ul>
+    </nav>
   </header>
 <% end %>
 

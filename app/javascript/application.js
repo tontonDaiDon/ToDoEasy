@@ -2,4 +2,14 @@
 
 import "@hotwired/turbo-rails"
 import "controllers"
-import "@rails/ujs"
+
+document.addEventListener("turbo:load", () => {
+  const toggle = document.querySelector(".menu-toggle");
+  const menu = document.querySelector(".menu");
+
+  if (toggle && menu) {
+    toggle.addEventListener("click", () => {
+      menu.classList.toggle("open");
+    });
+  }
+});

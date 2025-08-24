@@ -106,7 +106,9 @@ a:hover {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-}
+  gap: 8px; /* ボタンと挨拶の隙間 */
+  position: relative; /* ←基準にする */
+}  
 
 .header {
   display: flex;
@@ -115,6 +117,7 @@ a:hover {
   padding: 0.5rem 1rem;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
+  flex-wrap: nowrap; /* 基本的に折り返さない */
 }
 
 .header .left {
@@ -125,6 +128,14 @@ a:hover {
 
 .app-header .btn {
   border-radius: var(--radius-sm);
+}
+
+.header-user {
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-grow: 1;
+  text-align: center;
 }
 
 main.container {
@@ -141,6 +152,82 @@ main.container {
   background: var(--surface);
   border-top: 1px solid var(--border);
   color: var(--muted);
+}
+
+.password-hint {
+  font-size: 14px;     /* 文字の大きさ */
+  font-family: Arial, sans-serif; /* フォント */
+  color: #555;         /* 色 */
+}
+
+.nav-left,
+.nav-right {
+  display: block;
+}
+
+/* ハンバーガーボタン（初期は非表示→スマホで表示） */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* スマホ用メニュー（デフォルト非表示） */
+.menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 180px;
+  z-index: 1000;
+}
+
+.menu.open {
+  display: block;
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu ul li a,
+.menu ul li form {
+  display: block;
+  width: 100%;
+}
+
+/* --- レスポンシブ設定 --- */
+@media (max-width: 768px) {
+  .nav-left,
+  .nav-right {
+    display: none; /* スマホでは非表示 */
+  }
+  .menu {
+  display: none;
+    position: absolute;       /* ←ヘッダー基準で絶対配置 */
+    top: 100%;                /* ←ヘッダーの下に出す */
+    right: 0;                 /* ←右寄せ */
+    background: white;
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  .menu-toggle {
+    display: block; /* スマホでは表示 */
+  }
 }
 
 /* ================================
@@ -188,11 +275,7 @@ textarea:focus {
 .card .card-body {
   padding: var(--space-5);
 }
-@media (max-width: 400px) {
-  .card .card-body {
-    padding: var(--space-3);
-  }
-}
+
 
 .card-title {
   font-size: 1.5rem;
@@ -288,6 +371,40 @@ textarea:focus {
   color: #2c3e50;
 }
 
+@media (max-width: 480px) {
+  .card .card-body  {
+    padding: var(--space-3);
+  }
+  .discount-card {
+    max-width: 100%;   /* 横幅は画面にフィット */
+    padding: 12px;     /* 内側の余白を少し縮める */
+    box-sizing: border-box;
+    }
+  
+  .discount-card .form-group {
+    display: flex;
+    flex-direction: column;  /* ラベルと入力を縦並び */
+    align-items: flex-start; /* 左揃え */
+    gap: 0.3rem;
+    }
+  
+  .discount-card .form-group label {
+    flex: none;        /* 固定幅を解除 */
+    width: 100%;       /* ラベルを全幅に */
+    text-align: left;  /* 左寄せ */
+    margin-bottom: 0.2rem;
+    }
+  
+  .discount-card .form-group input[type="number"] {
+    width: 100%;       /* 入力欄を画面幅いっぱい */
+    box-sizing: border-box;
+    }
+  
+  .discount-card .form-actions .btn {
+    width: 100%;       /* ボタンも幅いっぱい */
+    }
+  }
+  
 
 
 /* ================================
@@ -468,20 +585,19 @@ body.shopping-lists-index {
 .btn-before {
   background-color: var(--danger-500); /* 赤 */
 }
-.btn-before:hover { background-color: var(--danger); }
-.btn-before.is-active { border-color: var(--danger); }
 
+.btn-before.is-active { border-color: var(--danger); }
 
 .btn-during {
   background-color: var(--warning-500); /* 黄 */
 }
-.btn-during:hover { background-color: var(--warning); }
+
 .btn-during.is-active { border-color: var(--warning); }
 
 .btn-after {
   background-color: var(--primary-500); /* 緑 */
 }
-.btn-after:hover { background-color: var(--primary-600); }
+
 .btn-after.is-active { border-color: var(--primary-600); }
 
 
@@ -508,81 +624,41 @@ body.shopping-lists-index {
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* 色バリエーション */
-.btn-history {
-  background-color: var(--accent);
-  color: #fff;
-}
-.btn-history:hover {
-  background-color: var(--accent-600);
-}
-.btn-primary {
-  background-color: var(--info-500);
-  color: #fff;
-}
-.btn-primary:hover {
-  background-color: var(--info);
-}
+/* ===============================
+   ボタン色を整理（緑基調に統一）
+   =============================== */
 
-.btn-outline-info {
-  background-color: transparent;
-  border: 2px solid var(--info);
-  color: var(--info);
-}
-.btn-outline-info:hover {
-  background-color: var(--info);
-  color: #fff;
-}
-
-.btn-success {
-  background-color: var(--primary-500);
-  color: #fff;
-}
-.btn-success:hover {
-  background-color: var(--primary-600);
-}
-.btn-logout {
-  background-color: var(--danger-500);
-  color: #fff;
-}
-.btn-logout:hover,
-.btn-delete:hover {
-  background-color: var(--danger);
-}
-
-.btn-info {
-  background-color: var(--info-500);
-  color: #fff;
-}
-.btn-info:hover,
-.btn-edit:hover {
-  background-color: var(--info);
-}
-
+/* 通常操作（保存・編集・追加など） */
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-new,
 .btn-edit {
-  background-color: var(--info-500);
+  background-color: #28a745; /* 緑 */
+  border-color: #28a745;
   color: #fff;
 }
 
-.btn-new {
-  background-color: var(--primary-500);
-  color: #fff;
-}
-.btn-new:hover {
-  background-color: var(--primary-600);
-}
 
-.btn-delete {
-  background-color: var(--danger-500);
+/* 危険操作（削除・ログアウトなど） */
+.btn-danger,
+.btn-delete,
+.btn-logout {
+  background-color: #dc3545; /* 赤 */
+  border-color: #dc3545;
   color: #fff;
 }
 
+
+/* 補助操作（戻る・キャンセルなど） */
+.btn-secondary,
 .btn-backindex {
-  background-color: var(--warning-500);
+  background-color: #6c757d; /* グレー */
+  border-color: #6c757d;
   color: #fff;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem; /* 明示して上下の伸びを抑える */
 }
+
 
 .btn-top,
 .logout-btn {
@@ -597,6 +673,7 @@ body.shopping-lists-index {
   display: inline-block;     /* link_toでもボタン形状に */
   box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* 軽い影 */
   transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap; /* 改行禁止 */
 }
 
 /* トップに戻るボタン（オレンジ系） */
@@ -604,9 +681,7 @@ body.shopping-lists-index {
   background-color: var(--pink);
   color: #fff;
 }
-.btn-top:hover { background-color: var(--pink-600); }
-.btn-backindex:hover,
-.btn-secondary:hover { background-color: var(--warning); }
+
 
 /* 汎用セカンダリ */
 .btn-secondary {
@@ -616,7 +691,7 @@ body.shopping-lists-index {
 
 /* ログアウトボタン（赤系） */
 .logout-btn {
-  background-color: #0004fac2;
+  background-color: #fa0000c2;
   color: white;
 }
 
@@ -664,8 +739,11 @@ body.shopping-lists-index {
 
 /* 小さい画面でボタンを画面幅いっぱいに */
 @media (max-width: 480px) {
+  .btn-top,
   .logout-btn {
     width: 100%;
     box-sizing: border-box;
+    font-size: 0.8rem;
+    padding: 4px 8px; /* ボタンをコンパクトに */
   }
 }
