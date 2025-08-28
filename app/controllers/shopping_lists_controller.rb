@@ -8,17 +8,16 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists or /shopping_lists.json
   def index
-    @shopping_lists = ShoppingList.order(created_at: :desc)
+    @shopping_lists = current_user.shopping_lists.order(created_at: :desc)
     if params[:year_month].present?
       year, month = params[:year_month].split('-')
       start_date = Date.new(year.to_i, month.to_i, 1)
       end_date = start_date.end_of_month
       @shopping_lists = @shopping_lists.where(shopped_on: start_date..end_date)
     end
-
-    # 月の予算合計を計算
+  
     @monthly_budget_total = @shopping_lists.sum(:budget)
-  end
+  end  
 
   # GET /shopping_lists/new
   def new
@@ -31,10 +30,10 @@ class ShoppingListsController < ApplicationController
 
   # POST /shopping_lists or /shopping_lists.json
   def create
-    @shopping_list = ShoppingList.new(shopping_list_params)
-      if @shopping_list.save
+    @shopping_list = current_user.shopping_lists.build(shopping_list_params)
+    if @shopping_list.save
       redirect_to shopping_lists_path, notice: 'リストが正常に作成されました。'
-      else
+    else
       render :new
     end
   end
@@ -101,8 +100,8 @@ class ShoppingListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_shopping_list
-      @shopping_list = ShoppingList.find(params[:id])
-    end
+      @shopping_list = current_user.shopping_lists.find(params[:id])
+    end    
 
     def record_not_found
       redirect_to shopping_lists_path, alert: '指定のリストが見つかりません。'
@@ -113,3 +112,4 @@ class ShoppingListsController < ApplicationController
       params.require(:shopping_list).permit(:name, :budget, :shopped_on)
     end
 end
+
