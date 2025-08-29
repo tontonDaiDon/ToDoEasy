@@ -1,9 +1,12 @@
 class ShoppingList < ApplicationRecord
-    has_many :items, dependent: :destroy
-    has_many :purchase_histories, dependent: :destroy
-    validates :name, presence: true
-    validates :budget, presence: true
-  
+  belongs_to :user   
+
+  has_many :items, dependent: :destroy
+  has_many :purchase_histories, dependent: :destroy
+
+  validates :name, presence: true
+  validates :budget, presence: true
+
   def total_price
     items.sum(:price) # 各itemにpriceカラムがある場合
   end
@@ -12,4 +15,5 @@ class ShoppingList < ApplicationRecord
     items.select(&:purchased).sum { |item| (item.price || 0) * (item.quantity || 1) }
   end
 end
+
 
