@@ -10,14 +10,20 @@ class ShoppingListsController < ApplicationController
   def index
     @shopping_lists = current_user.shopping_lists.order(created_at: :desc)
     if params[:year_month].present?
-      year, month = params[:year_month].split('-')
-      start_date = Date.new(year.to_i, month.to_i, 1)
-      end_date = start_date.end_of_month
-      @shopping_lists = @shopping_lists.where(shopped_on: start_date..end_date)
+      year, month = params[:year_month].split('-').map!(&:to_i)
+      start_date = Date.new(year, month, 1)
+      end_date   = start_date.end_of_month
+    
+      # shopped_on が範囲に入るもの OR shopped_on が nil で created_at が範囲のもの
+      @shopping_lists = @shopping_lists.where(
+        "(shopped_on BETWEEN :start AND :end) OR (shopped_on IS NULL AND created_at BETWEEN :start_dt AND :end_dt)",
+        start: start_date, end: end_date,
+        start_dt: start_date.beginning_of_day, end_dt: end_date.end_of_day
+      )
     end
-  
+    
     @monthly_budget_total = @shopping_lists.sum(:budget)
-  end  
+  end 
 
   # GET /shopping_lists/new
   def new
@@ -28,13 +34,14 @@ class ShoppingListsController < ApplicationController
   def edit
   end
 
-  # POST /shopping_lists or /shopping_lists.json
   def create
-    @shopping_list = current_user.shopping_lists.build(shopping_list_params)
+    @shopping_list = current_user.shopping_lists.new(shopping_list_params)
+  
     if @shopping_list.save
-      redirect_to shopping_lists_path, notice: 'リストが正常に作成されました。'
+      # 作成後に before_shopping ページへ
+      redirect_to before_shopping_shopping_list_path(@shopping_list), notice: '買い物リストを作成しました。'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
