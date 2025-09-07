@@ -26,30 +26,30 @@
 ・買い物中：買い物リストと照合して買い物の効率化，支払前に自分のカゴの中の合計金額を知ることができる  
 ・買い物後：買い物履歴を残していくことで家計管理ができる
 ## 利用方法
-・ユーザー新規登録を行う，またはログインする
+・ユーザー新規登録を行う，またはログインする　　
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c3dbf9c7-b9c1-41b8-9cf2-51e33b71a49d" />
 
-・タイトルや予算を設定して買い物リストを作成
+・タイトルや予算を設定して買い物リストを作成　　
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f786c89b-f662-483d-a1ff-95073013fc1f" />
 
-・買い物リストの中でアイテムを追加していく（買い物前）
+・買い物リストの中でアイテムを追加していく（買い物前）　　
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/d46e8c54-d2fb-4ae9-b086-34dbfe1fedc9" />
 
-・買い物しながら買い物かごに入れたアイテムには値段を入力してチェックボックスでチェック（買い物中）
+・買い物しながら買い物かごに入れたアイテムには値段を入力してチェックボックスでチェック（買い物中）　　
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cb619493-6b1d-4e3a-8474-34a97c63e3e4" />
 
-・買い物履歴を見ながら買い物メモを記入したりレシート画像などを記録することができる（買い物後）
+・買い物履歴を見ながら買い物メモを記入したりレシート画像などを記録することができる（買い物後）　　
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/52365f11-f613-48aa-a81d-aa4afefd63f7" />
 
 ## 機能一覧
-・基本的なCRUD機能
-・ユーザ認証機能（device)
-・画像アップロード機能（Refile）
-・バリデーション
-・レスポンシブ対応
+・基本的なCRUD機能　　
+・ユーザ認証機能（device)　　
+・画像アップロード機能（Refile）　　
+・バリデーション　　
+・レスポンシブ対応　　
 
 ## 開発環境
-・OS：Windows10 + Git Bash
-・言語：HTML，CSS，JavaScript，Ruby
-・フレームワーク：Ruby on Rails
+・OS：Windows10 + Git Bash　　
+・言語：HTML，CSS，JavaScript，Ruby　　
+・フレームワーク：Ruby on Rails　　
 
