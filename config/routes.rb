@@ -16,8 +16,4 @@ Rails.application.routes.draw do
   end
   resources :purchase_histories, only: [:index, :show]
   get '/logout', to: 'sessions#destroy', as: :simple_logout
-
-  get "reset_password", to: "users#reset_password"
-
-
 end
