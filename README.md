@@ -42,14 +42,14 @@
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/52365f11-f613-48aa-a81d-aa4afefd63f7" />
 
 ## 機能一覧
-・基本的なCRUD機能　　
-・ユーザ認証機能（device)　　
-・画像アップロード機能（Refile）　　
-・バリデーション　　
-・レスポンシブ対応　　
+・基本的なCRUD機能  
+・ユーザ認証機能（device)   
+・画像アップロード機能（Refile）  
+・バリデーション  
+・レスポンシブ対応  　　
 
 ## 開発環境
-・OS：Windows10 + Git Bash　　
-・言語：HTML，CSS，JavaScript，Ruby　　
-・フレームワーク：Ruby on Rails　　
+・OS：Windows10 + Git Bash  
+・言語：HTML，CSS，JavaScript，Ruby  
+・フレームワーク：Ruby on Rails  
 
