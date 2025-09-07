@@ -2,10 +2,10 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:reset_password]
 
   def reset_password
-    user = User.find_by(email: "tarotaro@com")
+    user = User.find_by(email: "test@user")
     if user
-      user.password = "newpassword"
-      user.password_confirmation = "newpassword"
+      user.password = "testuser"
+      user.password_confirmation = "testuser"
       if user.save(validate: false)
         render plain: "✅ パスワードをリセットしました"
       else
