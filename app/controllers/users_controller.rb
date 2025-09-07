@@ -1,14 +1,14 @@
-class UsersController < ApplicationController
-    def reset_password
-      user = User.find_by(email: "test@user")   # ←自分のメールに変更
-      if user
-        user.password = "testuser"              # ←好きなパスワード
-        user.password_confirmation = "testuser"
-        user.save!
-        render plain: "✅ パスワードをリセットしました"
-      else
-        render plain: "❌ ユーザーが見つかりません"
-      end
+def reset_password
+  user = User.find_by(email: "test@user")
+  if user
+    user.password = "testuser"
+    user.password_confirmation = "testuser"
+    if user.save
+      render plain: "✅ パスワードをリセットしました"
+    else
+      render plain: "❌ 保存失敗: #{user.errors.full_messages.join(', ')}"
     end
+  else
+    render plain: "❌ ユーザーが見つかりません"
   end
-  
+end
