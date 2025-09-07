@@ -17,7 +17,13 @@
   <% @purchase_histories.each do |history| %>
     <div class="card">
       <h4>購入日：<%= history.purchased_on %></h4>
-      <p><strong>リスト名：</strong><%= history.shopping_list&.name || "不明" %></p>
+      <p><strong>リスト名：</strong>
+        <% if history.shopping_list.present? %>
+          <%= link_to history.shopping_list.name, after_shopping_shopping_list_path(history.shopping_list), class: "list-link" %>
+        <% else %>
+          不明
+        <% end %>
+      </p>
       <p><strong>金額：</strong><span class="price"><%= history.shopping_list&.purchased_total_price || 0 %> 円</span></p>
       <p><strong>場所：</strong><%= history.place.presence || "未入力" %></p>
       <p><strong>メモ：</strong><%= history.note.presence || "なし" %></p>
