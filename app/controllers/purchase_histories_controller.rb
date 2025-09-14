@@ -6,7 +6,7 @@ class PurchaseHistoriesController < ApplicationController
 
   def index
     # 自分の買い物履歴を取得
-    @purchase_histories = current_user.purchase_histories.order(purchased_on: :desc)
+    @purchase_histories = current_user.purchase_histories.order(purchased_on: :desc).page(params[:page])
   
     # 年月で絞り込み
     if params[:year_month].present?
@@ -18,6 +18,7 @@ class PurchaseHistoriesController < ApplicationController
   
     # 月ごとの合計金額
     @monthly_total_price = @purchase_histories.joins(:shopping_list).sum('shopping_lists.budget')
+    @purchase_histories = @purchase_histories.page(params[:page])
   end
   
 
