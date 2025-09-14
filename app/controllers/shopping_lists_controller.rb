@@ -8,7 +8,7 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists or /shopping_lists.json
   def index
-    @shopping_lists = current_user.shopping_lists.order(created_at: :desc)
+    @shopping_lists = current_user.shopping_lists.order(created_at: :desc).page(params[:page])
     if params[:year_month].present?
       year, month = params[:year_month].split('-').map!(&:to_i)
       start_date = Date.new(year, month, 1)
@@ -23,6 +23,7 @@ class ShoppingListsController < ApplicationController
     end
     
     @monthly_budget_total = @shopping_lists.sum(:budget)
+    @shopping_lists = @shopping_lists.page(params[:page])
   end 
 
   # GET /shopping_lists/new
